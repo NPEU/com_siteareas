@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+    addrulepath="/administrator/components/com_siteareas/models/rules"
+    addfieldpath="/administrator/components/com_siteareas/models/fields"
+>
+    <fieldset
+        name="main"
+        label="COM_SITEAREAS__FIELDSET_MAIN_LABEL"
+    >
+        <field
+            name="id"
+            type="hidden"
+        />
+        <field
+            name="name"
+            type="text"
+            size="30"
+            label="COM_SITEAREAS_NAME_LABEL"
+            description="COM_SITEAREAS_NAME_DESC"
+            filter="string"
+            required="true"
+            class=""
+            labelclass=""
+        />
+        <field
+            name="alias"
+            type="text"
+            size="30"
+            label="COM_SITEAREAS_ALIAS_LABEL"
+            description="COM_SITEAREAS_ALIAS_DESC"
+            hint="COM_SITEAREAS_ALIAS_HINT"
+            filter="string"
+            class=""
+            labelclass=""
+        />
+        <field
+            name="contact_user_id"
+            type="staff"
+            label="COM_SITEAREAS_CONTACT_LABEL"
+            description="COM_SITEAREAS_CONTACT_DESC"
+            default="COM_SITEAREAS_CONTACT_DEFAULT"
+            filter="int"
+            class="inputbox"
+            required="true"
+        >
+            <option value="">COM_SITEAREAS_CONTACT_DEFAULT</option>
+        </field>
+        <field
+            name="root_menu_item_id"
+            type="rootmenuitem"
+            label="COM_BRANDPROJECTS_ROOT_MENU_ITEM_LABEL"
+            description="COM_BRANDPROJECTS_ROOT_MENU_ITEM_DESC"
+        >
+            <option value="">COM_BRANDPROJECTS_ROOT_MENU_DEFAULT</option>
+        </field>
+        <field name="published" type="list" label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+            filter="intval" size="1" default="1"
+        >
+            <option value="1">
+                JPUBLISHED</option>
+            <option value="0">
+                JUNPUBLISHED</option>
+            <option value="2">
+                JARCHIVED</option>
+            <option value="-2">
+                JTRASHED</option>
+        </field>
+    </fieldset>
+</form>
