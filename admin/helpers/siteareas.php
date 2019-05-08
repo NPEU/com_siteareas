@@ -25,7 +25,7 @@ class SiteAreasHelper
         $document->addStyleDeclaration('.icon-record:before {content: "\e244";}');
     }
 
-    
+
     /**
      * Get the actions
      */

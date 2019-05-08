@@ -78,7 +78,7 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
     protected function getGroups()
     {
         $groups = parent::getGroups();
-        
+
         // If an ID is already selected, we don't want the auto-generate option:
         if (!empty($this->value)) {
             unset($groups[0]);

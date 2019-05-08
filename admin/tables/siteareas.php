@@ -22,7 +22,7 @@ class SiteAreasTablesiteareas extends JTable
     function __construct(&$db)
     {
         parent::__construct('#__siteareas', 'id', $db);
-        
+
         // Set the alias since the column is called state
         $this->setColumnAlias('published', 'state');
     }

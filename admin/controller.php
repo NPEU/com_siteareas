@@ -20,7 +20,7 @@ class SiteAreasController extends JControllerLegacy
      * @var string
      */
     protected $default_view = 'records';
-    
+
     /**
      * display task
      *

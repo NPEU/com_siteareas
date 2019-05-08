@@ -54,8 +54,8 @@ $fieldsets = $this->form->getFieldsets();
                         <?php endif; ?>
                         <?php $hidden_fields = array(); foreach($form_fieldset as $field): if(!in_array($field->fieldname, $global_edit_fields)): ?>
                         <?php if($field->type == 'Hidden'){$hidden_fields[] = $field->input; continue;} ?>
-                    
-                        
+
+
                             <div class="control-group">
                                 <?php if ($field->type != 'Button'): ?>
                                 <div class="control-label">
@@ -67,13 +67,13 @@ $fieldsets = $this->form->getFieldsets();
                                 </div>
                             </div><!-- End control-group -->
                             <?php endif; endforeach; ?>
-                            
+
                         <?php if ($fieldset->name == 'main'): ?>
                         </div>
                         <div class="span3">
                         <?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
                         <?php endif; ?>
-                        
+
                         </div>
                         <?php echo implode("\n", $hidden_fields); ?>
                     </div>

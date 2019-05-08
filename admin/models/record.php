@@ -107,7 +107,7 @@ class SiteAreasModelRecord extends JModelAdmin
         $is_new = empty($data['id']);
         $input  = JFactory::getApplication()->input;
         #$app    = JFactory::getApplication();
-        
+
         // The following is generally useful for any app, but you'll need to make sure the database
         // schema includes these fields:
         $user        = JFactory::getUser();
@@ -183,17 +183,17 @@ class SiteAreasModelRecord extends JModelAdmin
                 }
             }
         }
-        
-        
+
+
         // Need to generate an Admin Group if one isn't selected:
         if (empty($data['admin_group_id'])) {
-            
+
             $group = array(
                 'id'       => 0,
                 'title'    => $data['name'] . ' admin',
                 'parent_id'=> 11
             );
-            
+
             JLoader::import('joomla.application.component.model');
             JLoader::import('group', JPATH_ADMINISTRATOR.'/components/com_users/models');
             $groupModel = JModelLegacy::getInstance('Group', 'UsersModel');
@@ -202,23 +202,23 @@ class SiteAreasModelRecord extends JModelAdmin
                JFactory::getApplication()->enqueueMessage($groupModel->getError());
                return false;
             }
-            
+
             $data['admin_group_id'] = $groupModel->getState('group.id');
         }
 
 
         // Need to create a menu item and add the new ID to the data if one doesn't exist:
         // https://stackoverflow.com/questions/12651075/programmatically-create-menu-item-in-joomla
-        
+
         // Need to act upon the selected menu type in order to generate the correct link.
         // This would seem impossible to do to try and support every menu type so may have to
         // abandon the option to choose the link type here - I think it's too complicated.
         // Just creating an heading, and providing a link to the menu item so it can manually set.
-        
-        
+
+
         //index.php?option=com_bespoke&view=bespoke
         //index.php?option=com_content&view=article&id=1668
-        
+
         //type = 'heading' (link can be empty)
         //id  menutype    title   alias   note    path    link    type    state   parent_id   level   component_id    checked_out checked_out_time    browserNav  access  img template_style_id   params  lft rgt home    language    client_id
         //962 mainmenu    Test Placeholder    test-placeholder    ""  test-placeholder    ""  heading 0   1   1   0   0   29/12/1899  0   1   ""  0   "{""menu-anchor_title"":"""",""menu-anchor_css"":"""",""menu_image"":"""",""menu_image_css"":"""",""menu_text"":1,""menu_show"":1}" 1359    1360    0   *   0
@@ -234,7 +234,7 @@ class SiteAreasModelRecord extends JModelAdmin
                 'state'        => 0,
                 'parent_id'    => 1,
                 'level'        => 1,
-                'component_id' => 0,                  
+                'component_id' => 0,
                 'language'     => '*'
             );
 
@@ -246,11 +246,11 @@ class SiteAreasModelRecord extends JModelAdmin
                 throw new Exception($menuTable->getError());
                 return false;
             }
-            
+
             $data['root_menu_item_id'] = $menuTable->id;
         }
-        
-        
+
+
 
         return parent::save($data);
     }

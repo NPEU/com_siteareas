@@ -20,7 +20,7 @@ Joomla.submitbutton = function(task)
                 }
             }
         }
- 
+
         if (isValid)
         {
             Joomla.submitform(task);

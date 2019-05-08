@@ -23,7 +23,7 @@ class SiteAreasViewRecords extends JViewLegacy
      */
     function display($tpl = null)
     {
-        
+
         // Get application
         $app = JFactory::getApplication();
         $context = "siteareas.list.admin.record";
@@ -62,13 +62,13 @@ class SiteAreasViewRecords extends JViewLegacy
     {
         $canDo = SiteAreasHelper::getActions();
         $user  = JFactory::getUser();
-        
+
         $title = JText::_('COM_SITEAREAS_MANAGER_RECORDS');
 
         if ($this->pagination->total) {
             $title .= "<span style='font-size: 0.5em; vertical-align: middle;'> (" . $this->pagination->total . ")</span>";
         }
-        
+
         JToolBarHelper::title($title, 'record');
         /*
         JToolBarHelper::addNew('record.add');
@@ -85,7 +85,7 @@ class SiteAreasViewRecords extends JViewLegacy
         {
             JToolbarHelper::editList('record.edit');
         }
-        
+
         if ($canDo->get('core.edit.state'))
         {
             JToolbarHelper::publish('records.publish', 'JTOOLBAR_PUBLISH', true);
@@ -95,8 +95,8 @@ class SiteAreasViewRecords extends JViewLegacy
             //JToolbarHelper::archiveList('record.archive');
             //JToolbarHelper::checkin('record.checkin');
         }
-        
-        
+
+
         if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
         {
             JToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'records.delete', 'JTOOLBAR_EMPTY_TRASH');
@@ -105,7 +105,7 @@ class SiteAreasViewRecords extends JViewLegacy
         {
             JToolbarHelper::trash('records.trash');
         }
-        
+
         JToolBarHelper::preferences('com_siteareas');
 
     }
@@ -114,7 +114,7 @@ class SiteAreasViewRecords extends JViewLegacy
      *
      * @return void
      */
-    protected function setDocument() 
+    protected function setDocument()
     {
         $document = JFactory::getDocument();
         $document->setTitle(JText::_('COM_SITEAREAS_ADMINISTRATION'));

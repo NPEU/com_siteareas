@@ -50,12 +50,12 @@ class SiteAreasModelRecords extends JModelList
         // Create the base select statement.
         $query->select('sa.*')
               ->from($db->quoteName('#__siteareas') . ' AS sa');
-              
+
         // Join the categories table again for the project group:
         /*$query->select('pc.title AS project_group')
             ->join('LEFT', '#__categories AS pc ON pc.id = sa.pr_catid');**/
-              
-              
+
+
         // Join over the users for the checked out user.
         $query->select('uc.name AS editor')
             ->join('LEFT', '#__users AS uc ON uc.id=sa.checked_out');
@@ -63,7 +63,7 @@ class SiteAreasModelRecords extends JModelList
         // Join the categories table:
         /*$query->select('c.title AS category_title')
             ->join('LEFT', '#__categories AS c ON c.id = p.catid');    */
-            
+
         // Filter: like / search
         $search = $this->getState('filter.search');
 

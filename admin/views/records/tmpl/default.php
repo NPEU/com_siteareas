@@ -67,7 +67,7 @@ $listDirn  = $this->escape($this->filter_order_Dir);
                 </td>
             </tr>
         </tfoot>
-        <tbody>  
+        <tbody>
         <?php foreach ($this->items as $i => $item) :
             $link = JRoute::_('index.php?option=com_siteareas&task=record.edit&id=' . $item->id);
             $canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
@@ -85,7 +85,7 @@ $listDirn  = $this->escape($this->filter_order_Dir);
                         <a href="<?php echo $link; ?>" class="hasTooltip" title="<?php echo JText::_('COM_SITEAREAS_EDIT_RECORD'); ?>">
                             <?php echo $item->name; ?>
                         </a>
-                        <span class="small">(<?php echo JText::_('COM_SITEAREAS_RECORDS_ALIAS'); ?>: <?php echo $item->alias; ?>)</span>               
+                        <span class="small">(<?php echo JText::_('COM_SITEAREAS_RECORDS_ALIAS'); ?>: <?php echo $item->alias; ?>)</span>
                     </div>
                 </td>
                 <td align="center">
@@ -105,7 +105,7 @@ $listDirn  = $this->escape($this->filter_order_Dir);
     <div class="alert alert-no-items">
         <?php echo JText::_('COM_SITEAREAS_NO_RECORDS'); ?>
     </div>
-    
+
     <?php endif; ?>
     <input type="hidden" name="task" value=""/>
     <input type="hidden" name="boxchecked" value="0"/>
