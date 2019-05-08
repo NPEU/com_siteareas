@@ -23,13 +23,13 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
      */
     public $type = 'RootMenuItem';
 
-	/**
-	 * Method to get the field input markup.
-	 *
-	 * @return  string  The field input markup.
-	 */
-	protected function getInput()
-	{
+    /**
+     * Method to get the field input markup.
+     *
+     * @return  string  The field input markup.
+     */
+    protected function getInput()
+    {
         $return   = array();
         $return[] = parent::getInput();
 
@@ -66,17 +66,17 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
         }
 
         return implode("\n", $return);
-	}
+    }
 
     /**
-	 * Method to get the field option groups.
-	 *
-	 * @return  array  The field option objects as a nested array in groups.
-	 *
-	 * @since   1.6
-	 */
-	protected function getGroups()
-	{
+     * Method to get the field option groups.
+     *
+     * @return  array  The field option objects as a nested array in groups.
+     *
+     * @since   1.6
+     */
+    protected function getGroups()
+    {
         $groups = parent::getGroups();
         
         // If an ID is already selected, we don't want the auto-generate option:

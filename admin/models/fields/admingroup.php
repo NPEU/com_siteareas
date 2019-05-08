@@ -28,13 +28,13 @@ class JFormFieldAdminGroup extends JFormFieldUsergrouplist
      */
     public $type = 'AdminGroup';
 
-	/**
-	 * Method to get the field input markup.
-	 *
-	 * @return  string  The field input markup.
-	 */
-	protected function getInput()
-	{
+    /**
+     * Method to get the field input markup.
+     *
+     * @return  string  The field input markup.
+     */
+    protected function getInput()
+    {
 
         $return   = array();
         $return[] = parent::getInput();
@@ -73,51 +73,51 @@ class JFormFieldAdminGroup extends JFormFieldUsergrouplist
         }
 
         return implode("\n", $return);
-	}
+    }
 
 
-	/**
+    /**
      * This method is copied from the parent class:
      * UsergrouplistField (/libraries/src/Form/Field/UsergrouplistField.php)
      * This is because I'm not realy sure how modifying the static options returned from that methof
      * affects things, so I thought it safest just to copy it.
      * Changes made are indicated.
      *
-	 * Method to get the options to populate list
-	 *
-	 * @return  array  The field option objects.
-	 *
-	 * @since   3.2
-	 */
-	protected function getOptions()
-	{
-		// Hash for caching
-		$hash = md5($this->element);
+     * Method to get the options to populate list
+     *
+     * @return  array  The field option objects.
+     *
+     * @since   3.2
+     */
+    protected function getOptions()
+    {
+        // Hash for caching
+        $hash = md5($this->element);
 
-		if (!isset(static::$options[$hash]))
-		{
+        if (!isset(static::$options[$hash]))
+        {
             // This was static::$options[$hash] = parent::getOptions();
             //                                    ^----^
             // but we don't want parent now, we want what it was originally referencing
             //                        v------------v
-			static::$options[$hash] = JFormFieldList::getOptions();
+            static::$options[$hash] = JFormFieldList::getOptions();
 
-			$groups         = UserGroupsHelper::getInstance()->getAll();
-			$checkSuperUser = (int) $this->getAttribute('checksuperusergroup', 0);
-			$isSuperUser    = Factory::getUser()->authorise('core.admin');
-			$options        = array();
+            $groups         = UserGroupsHelper::getInstance()->getAll();
+            $checkSuperUser = (int) $this->getAttribute('checksuperusergroup', 0);
+            $isSuperUser    = Factory::getUser()->authorise('core.admin');
+            $options        = array();
 
             $top_group_id    = 11;
             $top_group_level = false;
             $capture_options = false;
 
-			foreach ($groups as $group)
-			{
-				// Don't show super user groups to non super users.
-				if ($checkSuperUser && !$isSuperUser && Access::checkGroup($group->id, 'core.admin'))
-				{
-					continue;
-				}
+            foreach ($groups as $group)
+            {
+                // Don't show super user groups to non super users.
+                if ($checkSuperUser && !$isSuperUser && Access::checkGroup($group->id, 'core.admin'))
+                {
+                    continue;
+                }
 
                 // This is new code added to show only the groups we're interested in:
                 // If the top-group is reached, we can start processing NEXT iteration:
@@ -148,25 +148,25 @@ class JFormFieldAdminGroup extends JFormFieldUsergrouplist
                 }
 
                 $options[] = (object) array(
-					'text'  => $group->title,
-					'value' => $group->id,
-					'level' => $group->level
-				);
+                    'text'  => $group->title,
+                    'value' => $group->id,
+                    'level' => $group->level
+                );
 
                 // Done adding new stuff.
                 // The following was the original code:
                 /*
-				$options[] = (object) array(
-					'text'  => str_repeat('- ', $group->level) . $group->title,
-					'value' => $group->id,
-					'level' => $group->level
-				);
+                $options[] = (object) array(
+                    'text'  => str_repeat('- ', $group->level) . $group->title,
+                    'value' => $group->id,
+                    'level' => $group->level
+                );
                 */
-			}
+            }
 
-			static::$options[$hash] = array_merge(static::$options[$hash], $options);
-		}
+            static::$options[$hash] = array_merge(static::$options[$hash], $options);
+        }
 
-		return static::$options[$hash];
-	}
+        return static::$options[$hash];
+    }
 }
