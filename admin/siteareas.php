@@ -8,7 +8,7 @@
  */
 
 defined('_JEXEC') or die;
-
+//ini_set('display_errors', 'On');
 // Force-load the Admin language file to avoid repeating form language strings:
 // (this model is used in the front-end too, and the Admin lang isn't auto-loaded there.)
 $lang = JFactory::getLanguage();

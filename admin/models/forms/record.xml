@@ -34,26 +34,42 @@
             labelclass=""
         />
         <field
-            name="contact_user_id"
+            name="owner_user_id"
             type="staff"
-            label="COM_SITEAREAS_CONTACT_LABEL"
-            description="COM_SITEAREAS_CONTACT_DESC"
-            default="COM_SITEAREAS_CONTACT_DEFAULT"
+            label="COM_SITEAREAS_OWNER_LABEL"
+            description="COM_SITEAREAS_OWNER_DESC"
+            default="COM_SITEAREAS_OWNER_DEFAULT"
             filter="int"
             class="inputbox"
             required="true"
         >
-            <option value="">COM_SITEAREAS_CONTACT_DEFAULT</option>
+            <option value="">COM_SITEAREAS_OWNER_DEFAULT</option>
+        </field>
+        <field
+            name="admin_group_id"
+            type="admingroup"
+            label="COM_SITEAREAS_ADMIN_GROUP_LABEL"
+            description="COM_SITEAREAS_ADMIN_GROUP_DESC"
+        >
+            <option value="">COM_SITEAREAS_ADMIN_GROUP_DEFAULT</option>
         </field>
         <field
             name="root_menu_item_id"
             type="rootmenuitem"
-            label="COM_BRANDPROJECTS_ROOT_MENU_ITEM_LABEL"
-            description="COM_BRANDPROJECTS_ROOT_MENU_ITEM_DESC"
+            label="COM_SITEAREAS_ROOT_MENU_ITEM_LABEL"
+            description="COM_SITEAREAS_ROOT_MENU_ITEM_DESC"
+            menu_type="mainmenu"
         >
-            <option value="">COM_BRANDPROJECTS_ROOT_MENU_DEFAULT</option>
+            <option value="">COM_SITEAREAS_ROOT_MENU_ITEM_DEFAULT</option>
         </field>
-        <field name="published" type="list" label="JSTATUS"
+        <field
+            name="root_catid"
+            type="category"
+            extension="com_content"
+            label="COM_SITEAREAS_CATEGORY_LABEL"
+            description="COM_SITEAREAS_CATEGORY_DESC"
+        />
+        <field name="state" type="list" label="JSTATUS"
             description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
             filter="intval" size="1" default="1"
         >

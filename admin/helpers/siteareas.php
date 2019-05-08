@@ -22,7 +22,7 @@ class SiteAreasHelper
         // Set some global property
         $document = JFactory::getDocument();
 
-        $document->addStyleDeclaration('.icon-record:before {content: "\e014";}');
+        $document->addStyleDeclaration('.icon-record:before {content: "\e244";}');
     }
 
     

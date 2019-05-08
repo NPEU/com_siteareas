@@ -106,10 +106,13 @@ class SiteAreasViewRecord extends JViewLegacy
                     JToolbarHelper::save2new('record.save2new');
                 }
             }
+            
+            // Leaving this out. See note in models/record.php above comment:
+            // "Alter the name for save as copy" for explanation.
             // If checked out, we can still save
-            if ($canDo->get('core.create')) {
+            /*if ($canDo->get('core.create')) {
                 JToolbarHelper::save2copy('record.save2copy');
-            }
+            }*/
 
             JToolbarHelper::cancel('record.cancel', 'JTOOLBAR_CLOSE');
         }

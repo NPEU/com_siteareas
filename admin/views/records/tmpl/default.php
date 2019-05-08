@@ -50,7 +50,7 @@ $listDirn  = $this->escape($this->filter_order_Dir);
                     <?php echo JHtml::_('grid.sort', 'COM_SITEAREAS_RECORDS_NAME', 'name', $listDirn, $listOrder); ?>
                 </th>
                 <th width="40%">
-                    <?php echo JHtml::_('grid.sort', 'COM_SITEAREAS_RECORDS_CONTACT', 'contact_user_id', $listDirn, $listOrder); ?>
+                    <?php echo JHtml::_('grid.sort', 'COM_SITEAREAS_RECORDS_OWNER', 'owner_user_id', $listDirn, $listOrder); ?>
                 </th>
                 <th width="10%">
                     <?php echo JHtml::_('grid.sort', 'COM_SITEAREAS_PUBLISHED', 'state', $listDirn, $listOrder); ?>
@@ -70,7 +70,6 @@ $listDirn  = $this->escape($this->filter_order_Dir);
         <tbody>  
         <?php foreach ($this->items as $i => $item) :
             $link = JRoute::_('index.php?option=com_siteareas&task=record.edit&id=' . $item->id);
-            $cat_link = JRoute::_('index.php?option=com_categories&task=category.edit&id=' . $item->pr_catid . '&extension=com_siteareas');
             $canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
         ?>
             <tr>
@@ -86,15 +85,11 @@ $listDirn  = $this->escape($this->filter_order_Dir);
                         <a href="<?php echo $link; ?>" class="hasTooltip" title="<?php echo JText::_('COM_SITEAREAS_EDIT_RECORD'); ?>">
                             <?php echo $item->name; ?>
                         </a>
-                        <span class="small">(<?php echo JText::_('COM_SITEAREAS_RECORDS_ALIAS'); ?>: <?php echo $item->alias; ?>)</span>
-                        <div class="small">
-                            <?php echo JText::_('COM_SITEAREAS_RECORDS_GROUP'); ?>: <a class="hasTooltip" href="<?php echo $cat_link; ?>" title="<?php echo JText::_('COM_SITEAREAS_EDIT_GROUP'); ?>"><?php echo $item->project_group; ?></a>
-                        </div>
-                
+                        <span class="small">(<?php echo JText::_('COM_SITEAREAS_RECORDS_ALIAS'); ?>: <?php echo $item->alias; ?>)</span>               
                     </div>
                 </td>
                 <td align="center">
-                    <?php echo $item->contact_user_id; ?>
+                    <?php echo $item->owner_user_id; ?>
                 </td>
                 <td align="center">
                     <?php echo JHtml::_('jgrid.published', $item->state, $i, 'records.', true, 'cb'); ?>

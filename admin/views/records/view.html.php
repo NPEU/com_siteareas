@@ -60,7 +60,7 @@ class SiteAreasViewRecords extends JViewLegacy
      */
     protected function addToolBar()
     {
-        $canDo = BrandProjectsHelper::getActions();
+        $canDo = SiteAreasHelper::getActions();
         $user  = JFactory::getUser();
         
         $title = JText::_('COM_SITEAREAS_MANAGER_RECORDS');
@@ -107,9 +107,7 @@ class SiteAreasViewRecords extends JViewLegacy
         }
         
         JToolBarHelper::preferences('com_siteareas');
-        
-        // Render side bar.
-        $this->sidebar = JHtmlSidebar::render();
+
     }
     /**
      * Method to set up the document properties
