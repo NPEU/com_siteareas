@@ -35,7 +35,6 @@
         </schemas>
     </update>
 
-
     <administration>
         <!-- Administration Menu Section -->
         <menu>COM_SITEAREAS_MENU</menu>
