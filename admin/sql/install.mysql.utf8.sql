@@ -7,8 +7,6 @@ CREATE TABLE `#__siteareas` (
   `owner_user_id` int(11) NOT NULL DEFAULT '0',
   `admin_group_id` int(11) NOT NULL DEFAULT '0',
   `root_menu_item_id` int(11) NOT NULL DEFAULT '0',
-  `root_catid` int(11) NOT NULL DEFAULT '0',
-  `root_article_id` int(11) NOT NULL DEFAULT '0',
   `params` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `state` tinyint(3) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -19,7 +17,7 @@ CREATE TABLE `#__siteareas` (
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `access` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-)
+) 
     ENGINE          = MyISAM
     AUTO_INCREMENT  = 0
     DEFAULT CHARSET = utf8;

@@ -62,13 +62,6 @@
         >
             <option value="">COM_SITEAREAS_ROOT_MENU_ITEM_DEFAULT</option>
         </field>
-        <field
-            name="root_catid"
-            type="category"
-            extension="com_content"
-            label="COM_SITEAREAS_CATEGORY_LABEL"
-            description="COM_SITEAREAS_CATEGORY_DESC"
-        />
         <field name="state" type="list" label="JSTATUS"
             description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
             filter="intval" size="1" default="1"
@@ -83,4 +76,18 @@
                 JTRASHED</option>
         </field>
     </fieldset>
+    <fields name="params">
+        <fieldset
+            name="optional"
+            label="COM_SITEAREAS__FIELDSET_OPTIONAL_LABEL"
+        >
+            <field
+                name="root_catid"
+                type="rootcatid"
+                extension="com_content"
+                label="COM_SITEAREAS_CATEGORY_LABEL"
+                description="COM_SITEAREAS_CATEGORY_DESC"
+                />
+        </fieldset>
+    </fields>
 </form>
