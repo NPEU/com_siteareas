@@ -12,20 +12,85 @@ defined('_JEXEC') or die;
 /**
  * SiteAreas Table class
  */
-class SiteAreasTablesiteareas extends JTable
+class SiteAreasTableSiteAreas extends JTable
 {
+    /**
+     * Ensure the params is json encoded in the bind method
+     *
+     * @var    array
+     * @since  3.4
+     */
+    protected $_jsonEncode = array('params');
+
     /**
      * Constructor
      *
      * @param   JDatabaseDriver  &$db  A database connector object
      */
-    function __construct(&$db)
+    public function __construct(&$db)
     {
         parent::__construct('#__siteareas', 'id', $db);
 
         // Set the alias since the column is called state
         $this->setColumnAlias('published', 'state');
     }
+
+    /**
+     * Overloaded check method to ensure data integrity.
+     *
+     * @return  boolean  True on success.
+     */
+    public function check()
+    {
+        // Check for valid name
+        if (trim($this->name) == '')
+        {
+            $this->setError(JText::_('COM_SITEAREAS_ERR_TABLES_TITLE'));
+            return false;
+        }
+
+        // Check for existing name
+        $db = $this->getDbo();
+
+        $query = $db->getQuery(true)
+            ->select($db->quoteName('id'))
+            ->from($db->quoteName('#__siteareas'))
+            ->where($db->quoteName('name') . ' = ' . $db->quote($this->name))
+            ->where($db->quoteName('catid') . ' = ' . (int) $this->catid);
+        $db->setQuery($query);
+
+        $xid = (int) $db->loadResult();
+
+        if ($xid && $xid != (int) $this->id)
+        {
+            $this->setError(JText::_('COM_SITEAREAS_ERR_TABLES_NAME'));
+
+            return false;
+        }
+
+        if (empty($this->alias))
+        {
+            $this->alias = $this->name;
+        }
+
+        $this->alias = JApplicationHelper::stringURLSafe($this->alias);
+
+        if (trim(str_replace('-', '', $this->alias)) == '')
+        {
+            $this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
+        }
+
+        // Check the publish down date is not earlier than publish up.
+        if ($this->publish_down > $db->getNullDate() && $this->publish_down < $this->publish_up)
+        {
+            $this->setError(JText::_('JGLOBAL_START_PUBLISH_AFTER_FINISH'));
+
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Overloaded bind function
      *

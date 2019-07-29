@@ -5,7 +5,7 @@
 >
     <fieldset
         name="main"
-        label="COM_SITEAREAS__FIELDSET_MAIN_LABEL"
+        label="COM_SITEAREAS_FIELDSET_MAIN_LABEL"
     >
         <field
             name="id"
@@ -79,15 +79,41 @@
     <fields name="params">
         <fieldset
             name="optional"
-            label="COM_SITEAREAS__FIELDSET_OPTIONAL_LABEL"
+            label="COM_SITEAREAS_FIELDSET_OPTIONAL_LABEL"
         >
             <field
                 name="root_catid"
-                type="rootcatid"
+                type="rootcategory"
                 extension="com_content"
                 label="COM_SITEAREAS_CATEGORY_LABEL"
                 description="COM_SITEAREAS_CATEGORY_DESC"
-                />
+                default=""
+                exclude_categories="Uncategorised,Archive,Announcements,Reports"
+                published="1"
+            >
+                <option value="">COM_SITEAREAS_CATEGORY_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_CATEGORY_AUTO</option>
+            </field>
+            <field
+                name="brand_id"
+                type="brand"
+                label="COM_SITEAREAS_BRAND_LABEL"
+                description="COM_SITEAREAS_BRAND_DESC"
+                default=""
+            >
+                <option value="">COM_SITEAREAS_BRAND_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_BRAND_AUTO</option>
+            </field>
+            <field
+                name="template_style_id"
+                type="brandtemplatestyle"
+                label="COM_SITEAREAS_TEMPLATE_STYLE_LABEL"
+                description="COM_SITEAREAS_TEMPLATE_STYLE_DESC"
+                default=""
+            >
+                <option value="">COM_SITEAREAS_TEMPLATE_STYLE_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_TEMPLATE_STYLE_AUTO</option>
+            </field>
         </fieldset>
     </fields>
 </form>

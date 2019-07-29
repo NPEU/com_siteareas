@@ -8,36 +8,40 @@
  */
 
 defined('_JEXEC') or die;
-ini_set('display_errors', 'On');
+
 /**
  * SiteAreas Component Controller
  */
 class SiteAreasController extends JControllerLegacy
 {
     /**
-     * The default view for the display method.
+     * Method to display a view.
      *
-     * @var string
-     */
-    protected $default_view = 'records';
-
-    /**
-     * display task
+     * @param   boolean  $cacheable  If true, the view output will be cached
+     * @param   array    $urlparams  An array of safe url parameters and their variable types,
+     *                               for valid values see {@link JFilterInput::clean()}.
      *
-     * @return void
+     * @return  JControllerLegacy  This object to support chaining.
      */
-    function display($cachable = false, $urlparams = false)
+    public function display($cacheable = false, $urlparams = false)
     {
-        // Set default view if not set
-        //JFactory::getApplication()->input->set('view', JFactory::getApplication()->input->get('view', 'records'));
+        require_once JPATH_COMPONENT . '/helpers/siteareas.php';
 
-        //$session = JFactory::getSession();
-        //$registry = $session->get('registry');
+        $view   = $this->input->get('view', 'siteareas');
+        $layout = $this->input->get('layout', 'default');
+        $id     = $this->input->getInt('id');
 
-        // call parent behavior
-        parent::display($cachable, $urlparams);
+        // Check for edit form.
+        if ($view == 'sitearea' && $layout == 'edit' && !$this->checkEditId('com_siteareas.edit.sitearea', $id))
+        {
+            // Somehow the person just went to the form - we don't allow that.
+            $this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+            $this->setMessage($this->getError(), 'error');
+            $this->setRedirect(JRoute::_('index.php?option=com_siteareas&view=siteareas', false));
 
-        // Add style
-        SiteAreasHelper::addStyle();
+            return false;
+        }
+
+        return parent::display();
     }
 }

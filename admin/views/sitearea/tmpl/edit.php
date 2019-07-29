@@ -31,7 +31,6 @@ $global_edit_fields = array(
     'version_note'
 );
 
-
 $fieldsets = $this->form->getFieldsets();
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_siteareas&layout=edit&id=' . (int) $this->item->id); ?>"

@@ -17,7 +17,7 @@ CREATE TABLE `#__siteareas` (
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `access` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) 
+)
     ENGINE          = MyISAM
     AUTO_INCREMENT  = 0
     DEFAULT CHARSET = utf8;

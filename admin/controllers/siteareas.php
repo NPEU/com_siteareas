@@ -10,9 +10,9 @@
 defined('_JEXEC') or die;
 
 /**
- * SiteAreas Records Controller
+ * SiteAreas Controller
  */
-class SiteAreasControllerRecords extends JControllerAdmin
+class SiteAreasControllerSiteAreas extends JControllerAdmin
 {
     /**
      * Proxy for getModel.
@@ -23,10 +23,8 @@ class SiteAreasControllerRecords extends JControllerAdmin
      *
      * @return  object  The model.
      */
-    public function getModel($name = 'Record', $prefix = 'SiteAreasModel', $config = array('ignore_request' => true))
+    public function getModel($name = 'SiteArea', $prefix = 'SiteAreasModel', $config = array('ignore_request' => true))
     {
-        $model = parent::getModel($name, $prefix, $config);
-
-        return $model;
+        return parent::getModel($name, $prefix, $config);
     }
 }

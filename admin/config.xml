@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-    <fieldset
-        name="records"
-        label="COM_SITEAREAS_CONFIG_RECORDS_SETTINGS_LABEL"
-        description="COM_SITEAREAS_CONFIG_RECORDS_SETTINGS_DESC"
+    <fields
+        addfieldpath="/administrator/components/com_siteareas/models/fields"
     >
-        <field
-            name="email_admins"
-            type="textarea"
-            label="COM_SITEAREAS_CONFIG_EMAIL_ADMINS_LABEL"
-            description="COM_SITEAREAS_CONFIG_EMAIL_ADMINS_DESC"
-            cols="50"
-            rows="10"
-            filter="string"
-        />
-    </fieldset>
-
-    <fieldset name="permissions"
-        description="JCONFIG_PERMISSIONS_DESC"
-        label="JCONFIG_PERMISSIONS_LABEL"
-    >
-
-        <field name="rules" type="rules"
-            component="com_siteareas"
-            filter="rules"
-            validate="rules"
+        <fieldset
+            name="records"
+            label="COM_SITEAREAS_CONFIG_RECORDS_SETTINGS_LABEL"
+            description="COM_SITEAREAS_CONFIG_RECORDS_SETTINGS_DESC"
+        >
+            <field
+                name="template"
+                type="templates"
+                label="COM_SITEAREAS_CONFIG_TEMPLATE_LABEL"
+                description="COM_SITEAREAS_CONFIG_TEMPLATE_DESC"
+            />
+        </fieldset>
+        <fieldset name="permissions"
+            description="JCONFIG_PERMISSIONS_DESC"
             label="JCONFIG_PERMISSIONS_LABEL"
-            section="component" />
-    </fieldset>
+        >
+
+            <field name="rules" type="rules"
+                component="com_siteareas"
+                filter="rules"
+                validate="rules"
+                label="JCONFIG_PERMISSIONS_LABEL"
+                section="component" />
+        </fieldset>
+    </fields>
 </config>

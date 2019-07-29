@@ -10,16 +10,17 @@
 defined('_JEXEC') or die;
 
 /**
- * SiteAreas Record View
+ * SiteAreas SiteArea View
  */
-class SiteAreasViewRecord extends JViewLegacy
+class SiteAreasViewSiteArea extends JViewLegacy
 {
-    /**
-     * View form
-     *
-     * @var         form
-     */
-    protected $form = null;
+    protected $state;
+
+    protected $item;
+
+    protected $form;
+
+    protected $script;
 
     /**
      * Display the SiteAreas view
@@ -30,11 +31,10 @@ class SiteAreasViewRecord extends JViewLegacy
      */
     public function display($tpl = null)
     {
-        // Get the Data
-        $this->form   = $this->get('Form');
-        $this->item   = $this->get('Item');
-        $this->script = $this->get('Script');
-        $this->canDo  = SiteAreasHelper::getActions($this->item->id, $this->getModel());
+        $this->state = $this->get('State');
+        $this->item  = $this->get('Item');
+        $this->form  = $this->get('Form');
+
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
@@ -71,53 +71,43 @@ class SiteAreasViewRecord extends JViewLegacy
         $isNew = ($this->item->id == 0);
 
         // Build the actions for new and existing records.
-        $canDo = $this->canDo;
+        $canDo = JHelperContent::getActions('com_siteareas');
 
-        /*if ($isNew) {
-            $title = JText::_('COM_SITEAREAS_MANAGER_RECORD_NEW');
-        } else {
-            $title = JText::_('COM_SITEAREAS_MANAGER_RECORD_EDIT');
-        }
-
-        JToolBarHelper::title($title, 'record');*/
-
+        // Note 'question-circle' is an icon/classname. Change to suit.
         JToolbarHelper::title(
             JText::_('COM_SITEAREAS_MANAGER_' . ($checkedOut ? 'RECORD_VIEW' : ($isNew ? 'RECORD_ADD' : 'RECORD_EDIT'))),
-            'palette'
+            'question-circle'
         );
 
         // For new records, check the create permission.
         if ($isNew && (count($user->getAuthorisedCategories('com_siteareas', 'core.create')) > 0)) {
-            JToolbarHelper::apply('record.apply');
-            JToolbarHelper::save('record.save');
-            JToolbarHelper::save2new('record.save2new');
-            JToolbarHelper::cancel('record.cancel');
+            JToolbarHelper::apply('sitearea.apply');
+            JToolbarHelper::save('sitearea.save');
+            JToolbarHelper::save2new('sitearea.save2new');
+            JToolbarHelper::cancel('sitearea.cancel');
         } else {
             // Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
             $itemEditable = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
 
             // Can't save the record if it's checked out and editable
             if (!$checkedOut && $itemEditable) {
-                JToolbarHelper::apply('record.apply');
-                JToolbarHelper::save('record.save');
+                JToolbarHelper::apply('sitearea.apply');
+                JToolbarHelper::save('sitearea.save');
 
                 // We can save this record, but check the create permission to see if we can return to make a new one.
                 if ($canDo->get('core.create')) {
-                    JToolbarHelper::save2new('record.save2new');
+                    JToolbarHelper::save2new('sitearea.save2new');
                 }
             }
-
-            // Leaving this out. See note in models/record.php above comment:
-            // "Alter the name for save as copy" for explanation.
             // If checked out, we can still save
-            /*if ($canDo->get('core.create')) {
-                JToolbarHelper::save2copy('record.save2copy');
-            }*/
+            if ($canDo->get('core.create')) {
+                JToolbarHelper::save2copy('sitearea.save2copy');
+            }
 
-            JToolbarHelper::cancel('record.cancel', 'JTOOLBAR_CLOSE');
+
+            JToolbarHelper::cancel('sitearea.cancel', 'JTOOLBAR_CLOSE');
         }
     }
-
     /**
      * Method to set up the document properties
      *
@@ -129,9 +119,13 @@ class SiteAreasViewRecord extends JViewLegacy
         $document = JFactory::getDocument();
         $document->setTitle($isNew ? JText::_('COM_SITEAREAS_RECORD_CREATING') :
                 JText::_('COM_SITEAREAS_RECORD_EDITING'));
-        $document->addScript(JURI::root() . $this->script);
+
+        if (!empty($this->script)) {
+            $document->addScript(JURI::root() . $this->script);
+        }
+
         $document->addScript(JURI::root() . "/administrator/components/com_siteareas"
-                                          . "/views/record/submitbutton.js");
+                                          . "/views/sitearea/submitbutton.js");
         JText::script('COM_SITEAREAS_RECORD_ERROR_UNACCEPTABLE');
     }
 }

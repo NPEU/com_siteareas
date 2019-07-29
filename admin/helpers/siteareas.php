@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  * SiteAreasHelper component helper.
  */
-class SiteAreasHelper
+class SiteAreasHelper extends JHelperContent
 {
     /**
      * Add style
@@ -21,43 +21,28 @@ class SiteAreasHelper
     {
         // Set some global property
         $document = JFactory::getDocument();
-
-        $document->addStyleDeclaration('.icon-record:before {content: "\e244";}');
+        // Update this with icon of choice from:
+        // /administrator/templates/isis/css/template.css
+        $document->addStyleDeclaration('.icon-sitearea:before {content: "\e244";}');
     }
 
-
     /**
-     * Get the actions
+     * Configure the Submenu. Delete if component has only one view.
+     *
+     * @param   string  The name of the active view.
      */
-    public static function getActions($itemId = 0, $model = null)
+    public static function addSubmenu($vName = 'siteareas')
     {
-        jimport('joomla.access.access');
-        $user   = JFactory::getUser();
-        $result = new JObject;
+        JHtmlSidebar::addEntry(
+            JText::_('COM_SITEAREAS_MANAGER_SUBMENU_RECORDS'),
+            'index.php?option=com_siteareas&view=siteareas',
+            $vName == 'siteareas'
+        );
 
-        if (empty($itemId)) {
-            $assetName = 'com_siteareas';
-        }
-        else {
-            $assetName = 'com_siteareas.record.'.(int) $itemId;
-        }
-
-        $actions = JAccess::getActions('com_siteareas', 'component');
-
-        foreach ($actions as $action) {
-            $result->set($action->name, $user->authorise($action->name, $assetName));
-        }
-
-        // Check if user belongs to assigned category and permit edit if so:
-        if ($model) {
-            $item  = $model->getItem($itemId);
-
-            if (!!($user->authorise('core.edit', 'com_siteareas')
-            || $user->authorise('core.edit', 'com_content.category.' . $item->catid))) {
-                $result->set('core.edit', true);
-            }
-        }
-
-        return $result;
+        JHtmlSidebar::addEntry(
+            JText::_('COM_SITEAREAS_MANAGER_SUBMENU_CATEGORIES'),
+            'index.php?option=com_categories&view=categories&extension=com_siteareas',
+            $vName == 'categories'
+        );
     }
 }
