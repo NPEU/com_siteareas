@@ -26,7 +26,22 @@ class SiteAreasModelSiteAreas extends JModelList
         if (empty($config['filter_fields']))
         {
             $config['filter_fields'] = array(
-
+                'id', 'a.id',
+                'name', 'a.name',
+                'alias', 'a.alias',
+                'params', 'a.params',
+                'state', 'a.state',
+                'owner_user_id', 'a.owner_user_id',
+                'o.name', 'owner_name',
+                'o.username', 'owner_username',
+                'o.email', 'owner_email',
+                'created', 'a.created',
+                'created_by', 'a.created_by',
+                'modified', 'a.modified',
+                'modified_by', 'a.modified_by',
+                'checked_out', 'a.checked_out',
+                'checked_out_time', 'a.checked_out_time',
+                'access', 'a.access'
             );
         }
 
@@ -43,7 +58,7 @@ class SiteAreasModelSiteAreas extends JModelList
      *
      * @note    Calling getState in this method will result in recursion.
      */
-    protected function populateState($ordering = 'a.name', $direction = 'asc')
+    protected function populateState($ordering = 'a.name', $direction = 'ASC')
     {
         // Load the filter state.
         $this->setState('filter.search', $this->getUserStateFromRequest($this->context . '.filter.search', 'filter_search', '', 'string'));
@@ -88,17 +103,24 @@ class SiteAreasModelSiteAreas extends JModelList
         $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
 
-        // Create the base select statement.
-        $query->select('a.*')
-              ->from($db->quoteName('#__siteareas') . ' AS a');
+        // Select the required fields from the table.
+		$query->select(
+			$this->getState(
+				'list.select',
+				'a.id, a.name, a.alias, a.owner_user_id, a.checked_out, a.checked_out_time, a.created_by, a.state'
+			)
+		);
+		$query->from($db->quoteName('#__siteareas', 'a'));
 
         // Join over the users for the checked out user.
-        $query->select('uc.name AS editor')
-            ->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
+		$query->select($db->quoteName('uc.name', 'editor'))
+			->join('LEFT', $db->quoteName('#__users', 'uc') . ' ON ' . $db->qn('uc.id') . ' = ' . $db->qn('a.checked_out'));
 
         // Join over the users for the owner user.
-        $query->select('o.name AS owner_name, o.username AS owner_alias, o.email AS owner_email')
-            ->join('LEFT', '#__users AS o ON o.id=a.owner_user_id');
+		$query->select($db->quoteName('o.name', 'owner_name'))
+            ->select($db->quoteName('o.username', 'owner_username'))
+            ->select($db->quoteName('o.email', 'owner_email'))
+			->join('LEFT', $db->quoteName('#__users', 'o') . ' ON ' . $db->qn('o.id') . ' = ' . $db->qn('a.owner_user_id'));
 
 
         // Filter: like / search

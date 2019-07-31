@@ -63,7 +63,7 @@ class SiteAreasViewSiteAreas extends JViewLegacy
             $title .= "<span style='font-size: 0.5em; vertical-align: middle;'> (" . $this->pagination->total . ")</span>";
         }
 
-        JToolBarHelper::title($title, 'sitearea');
+        JToolBarHelper::title($title, 'tree-2');
         /*
         JToolBarHelper::addNew('sitearea.add');
         if (!empty($this->items)) {
@@ -125,7 +125,10 @@ class SiteAreasViewSiteAreas extends JViewLegacy
     protected function getSortFields()
     {
         return array(
-
+            'a.name' => JText::_('COM_SITEAREAS_RECORDS_NAME'),
+            'a.owner_user_id' => JText::_('COM_SITEAREAS_RECORDS_OWNER'),
+            'a.state' => JText::_('COM_SITEAREAS_PUBLISHED'), 
+            'a.id'    => JText::_('COM_SITEAREAS_ID')
         );
     }
 }

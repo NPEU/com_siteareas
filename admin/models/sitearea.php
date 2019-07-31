@@ -55,17 +55,17 @@ class SiteAreasModelSiteArea extends JModelAdmin
             return false;
         }
 
-            // Determine correct permissions to check.
-        if ($this->getState('sitearea.id'))
+        // Determine correct permissions to check.
+        /*if ($this->getState('sitearea.id'))
         {
             // Existing record. Can only edit in selected categories.
-            $form->setFieldAttribute('action', 'core.edit');
+            $form->setFieldAttribute('catid', 'action', 'core.edit');
         }
         else
         {
             // New record. Can only create in selected categories.
-            $form->setFieldAttribute('action', 'core.create');
-        }
+            $form->setFieldAttribute('catid', 'action', 'core.create');
+        }*/
 
         // Modify the form based on access controls.
         if (!$this->canEditState((object) $data))
@@ -153,7 +153,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
         // Alter the name for save as copy
         if ($app->input->get('task') == 'save2copy')
         {
-            list($name, $alias) = $this->generateNewTitle($data['catid'], $data['alias'], $data['name']);
+            list($name, $alias) = $this->generateNewTitle(null, $data['alias'], $data['name']);
             $data['name']    = $name;
             $data['alias']    = $alias;
             $data['state']    = 0;
@@ -169,7 +169,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
                     $data['alias'] = JFilterOutput::stringURLSafe($data['name']);
                 }
 
-                $table = JTable::getInstance('SiteArea', 'SiteAreasTable');
+                $table = JTable::getInstance('SiteAreas', 'SiteAreasTable');
 
                 if ($table->load(array('alias' => $data['alias']))) {
                     $msg = JText::_('COM_CONTENT_SAVE_WARNING');
@@ -371,7 +371,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
         // Alter the name & alias
         $table = $this->getTable();
 
-        while ($table->load(array('alias' => $alias, 'catid' => $category_id)))
+        while ($table->load(array('alias' => $alias)))
         {
             if ($name == $table->name)
             {

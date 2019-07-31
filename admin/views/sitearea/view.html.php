@@ -76,7 +76,7 @@ class SiteAreasViewSiteArea extends JViewLegacy
         // Note 'question-circle' is an icon/classname. Change to suit.
         JToolbarHelper::title(
             JText::_('COM_SITEAREAS_MANAGER_' . ($checkedOut ? 'RECORD_VIEW' : ($isNew ? 'RECORD_ADD' : 'RECORD_EDIT'))),
-            'question-circle'
+            'tree-2'
         );
 
         // For new records, check the create permission.

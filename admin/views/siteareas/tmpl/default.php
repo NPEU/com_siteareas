@@ -47,34 +47,33 @@ $listDirn    = $this->escape($this->state->get('list.direction'));
                         <?php echo JHtml::_('grid.checkall'); ?>
                     </th>
                     <th width="40%">
-                        <?php echo JHtml::_('searchtools.sort', 'COM_SITEAREAS_RECORDS_NAME', 'name', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('searchtools.sort', 'COM_SITEAREAS_RECORDS_NAME', 'a.name', $listDirn, $listOrder); ?>
                     </th>
-                    <th width="40%">
-                        <?php echo JHtml::_('grid.sort', 'COM_SITEAREAS_RECORDS_OWNER', 'owner_user_id', $listDirn, $listOrder); ?>
+                    <th width="34%">
+                        <?php echo JHtml::_('searchtools.sort', 'COM_SITEAREAS_RECORDS_OWNER', 'owner_name', $listDirn, $listOrder); ?>
                     </th>
                     <th width="10%">
-                        <?php echo JHtml::_('searchtools.sort', 'COM_SITEAREAS_PUBLISHED', 'state', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('searchtools.sort', 'COM_SITEAREAS_PUBLISHED', 'a.state', $listDirn, $listOrder); ?>
                     </th>
-                    <th width="4%">
-                        <?php echo JHtml::_('searchtools.sort', 'COM_SITEAREAS_ID', 'id', $listDirn, $listOrder); ?>
+                    <th width="10%">
+                        <?php echo JHtml::_('searchtools.sort', 'COM_SITEAREAS_ID', 'a.id', $listDirn, $listOrder); ?>
                     </th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <td colspan="5">
+                    <td colspan="6">
                         <?php echo $this->pagination->getListFooter(); ?>
                     </td>
                 </tr>
             </tfoot>
             <tbody>
             <?php foreach ($this->items as $i => $item) : ?>
-                <?php $item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_siteareass&task=category.edit&id=' . $item->catid); ?>
-                <?php $canCreate      = $user->authorise('core.create',     'com_siteareas.category.' . $item->catid); ?>
-                <?php $canEdit        = $user->authorise('core.edit',       'com_siteareas.category.' . $item->catid); ?>
+                <?php $canCreate      = $user->authorise('core.create',     'com_siteareas.' . $item->id); ?>
+                <?php $canEdit        = $user->authorise('core.edit',       'com_siteareas.' . $item->id); ?>
                 <?php $canCheckin     = $user->authorise('core.manage',     'com_checkin') || $item->checked_out == $user->id || $item->checked_out == 0; ?>
-                <?php $canEditOwn     = $user->authorise('core.edit.own',   'com_siteareas.category.' . $item->catid) && $item->created_by == $user->id; ?>
-                <?php $canChange      = $user->authorise('core.edit.state', 'com_siteareas.category.' . $item->catid) && $canCheckin; ?>
+                <?php $canEditOwn     = $user->authorise('core.edit.own',   'com_siteareas.' . $item->id) && $item->created_by == $user->id; ?>
+                <?php $canChange      = $user->authorise('core.edit.state', 'com_siteareas.' . $item->id) && $canCheckin; ?>
 
                 <tr>
                     <td><?php echo $this->pagination->getRowOffset($i); ?></td>
@@ -96,7 +95,7 @@ $listDirn    = $this->escape($this->state->get('list.direction'));
                         </span>
                     </td>
                     <td align="center">
-                        <?php echo $item->owner_name; ?>
+                        <a href="mailto:<?php echo $item->owner_email; ?>"><?php echo $item->owner_name; ?></a>
                     </td>
                     <td align="center">
                         <?php echo JHtml::_('jgrid.published', $item->state, $i, 'siteareas.', true, 'cb'); ?>
