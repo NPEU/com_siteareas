@@ -56,7 +56,6 @@ class SiteAreasTableSiteAreas extends JTable
             ->select($db->quoteName('id'))
             ->from($db->quoteName('#__siteareas'))
             ->where($db->quoteName('name') . ' = ' . $db->quote($this->name))
-            ->where($db->quoteName('catid') . ' = ' . (int) $this->catid);
         $db->setQuery($query);
 
         $xid = (int) $db->loadResult();

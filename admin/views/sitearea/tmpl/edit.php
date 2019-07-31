@@ -83,8 +83,9 @@ $fieldsets = $this->form->getFieldsets();
     <input type="hidden" name="task" value="record.edit" />
     <?php echo JHtml::_('form.token'); ?>
 </form>
-
+<?php /*
 <h2>Debug</h2>
 <pre>
 <?php var_dump($this->item); ?>
 </pre>
+*/ ?>

@@ -47,7 +47,7 @@ $listDirn    = $this->escape($this->state->get('list.direction'));
                         <?php echo JHtml::_('grid.checkall'); ?>
                     </th>
                     <th width="40%">
-                        <?php echo JHtml::_('searchtools.sort', 'COM_SITEAREAS_RECORDS_TITLE', 'title', $listDirn, $listOrder); ?>
+                        <?php echo JHtml::_('searchtools.sort', 'COM_SITEAREAS_RECORDS_NAME', 'name', $listDirn, $listOrder); ?>
                     </th>
                     <th width="40%">
                         <?php echo JHtml::_('grid.sort', 'COM_SITEAREAS_RECORDS_OWNER', 'owner_user_id', $listDirn, $listOrder); ?>
@@ -87,16 +87,13 @@ $listDirn    = $this->escape($this->state->get('list.direction'));
                         <?php endif; ?>
                         <?php if ($canEdit || $canEditOwn) : ?>
                             <a href="<?php echo JRoute::_('index.php?option=com_siteareas&task=sitearea.edit&id=' . (int) $item->id); ?>" title="<?php echo JText::_('COM_SITEAREAS_EDIT_RECORD'); ?>">
-                                <?php echo $this->escape($item->title); ?></a>
+                                <?php echo $this->escape($item->name); ?></a>
                         <?php else : ?>
-                                <?php echo $this->escape($item->title); ?>
+                                <?php echo $this->escape($item->name); ?>
                         <?php endif; ?>
                         <span class="small">
                             <?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias)); ?>
                         </span>
-                        <div class="small">
-                            <?php echo JText::_('JCATEGORY') . ': ' . (empty($item->category_title) ? 'none' : '<a href="' . $item->cat_link . '" target="_blank">' . $this->escape($item->category_title) . '</a>'); ?>
-                        </div>
                     </td>
                     <td align="center">
                         <?php echo $item->owner_name; ?>

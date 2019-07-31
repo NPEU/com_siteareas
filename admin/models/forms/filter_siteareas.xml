@@ -18,32 +18,19 @@
             >
             <option value="">JOPTION_SELECT_PUBLISHED</option>
         </field>
-        <!-- Delete this field if not using categories: -->
-        <field
-            name="category_id"
-            type="category"
-            label="JOPTION_FILTER_CATEGORY"
-            description="JOPTION_FILTER_CATEGORY_DESC"
-            extension="com_siteareas"
-            onchange="this.form.submit();"
-        >
-            <option value="">JOPTION_SELECT_CATEGORY</option>
-        </field>
     </fields>
     <fields name="list">
         <field
             name="fullordering"
             type="list"
             onchange="this.form.submit();"
-            default="a.title ASC"
-            >
+            default="a.name ASC"
+        >
             <option value="">JGLOBAL_SORT_BY</option>
             <option value="a.state ASC">JSTATUS_ASC</option>
             <option value="a.state DESC">JSTATUS_DESC</option>
-            <option value="a.title ASC">JGLOBAL_TITLE_ASC</option>
-            <option value="a.title DESC">JGLOBAL_TITLE_DESC</option>
-            <option value="category_title ASC">JCATEGORY_ASC</option>
-            <option value="category_title DESC">JCATEGORY_DESC</option>
+            <option value="a.name ASC">COM_SITEAREAS_RECORDS_NAME_ASC</option>
+            <option value="a.name DESC">COM_SITEAREAS_RECORDS_NAME_DESC</option>
             <option value="a.id ASC">JGRID_HEADING_ID_ASC</option>
             <option value="a.id DESC">JGRID_HEADING_ID_DESC</option>
         </field>

@@ -10,10 +10,16 @@
 defined('_JEXEC') or die;
 
 /**
- * SiteAreas Records View
+ * SiteAreas SiteAreas View
  */
-class SiteAreasViewRecords extends JViewLegacy
+class SiteAreasViewSiteAreas extends JViewLegacy
 {
+    protected $items;
+
+    protected $pagination;
+
+    protected $state;
+
     /**
      * Display the SiteAreas view
      *
@@ -23,34 +29,21 @@ class SiteAreasViewRecords extends JViewLegacy
      */
     function display($tpl = null)
     {
-
-        // Get application
-        $app = JFactory::getApplication();
-        $context = "siteareas.list.admin.record";
-        // Get data from the model
-        $this->items            = $this->get('Items');
-        $this->pagination       = $this->get('Pagination');
-        $this->state            = $this->get('State');
-        $this->filter_order     = $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'record', 'cmd');
-        $this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
-        $this->filterForm       = $this->get('FilterForm');
-        $this->activeFilters    = $this->get('ActiveFilters');
+        $this->state         = $this->get('State');
+        $this->items         = $this->get('Items');
+        $this->pagination    = $this->get('Pagination');
+        $this->filterForm    = $this->get('FilterForm');
+        $this->activeFilters = $this->get('ActiveFilters');
 
         // Check for errors.
-        if (count($errors = $this->get('Errors'))) {
-            JError::raiseError(500, implode('<br />', $errors));
-
+        if (count($errors = $this->get('Errors')))
+        {
+            JError::raiseError(500, implode("\n", $errors));
             return false;
         }
 
-        // Set the toolbar and number of found items
-        $this->addToolBar();
-
-        // Display the template
+        $this->addToolbar();
         parent::display($tpl);
-
-        // Set the document
-        $this->setDocument();
     }
 
     /**
@@ -60,7 +53,8 @@ class SiteAreasViewRecords extends JViewLegacy
      */
     protected function addToolBar()
     {
-        $canDo = SiteAreasHelper::getActions();
+        //$canDo = SiteAreasHelper::getActions();
+        $canDo = JHelperContent::getActions('com_siteareas');
         $user  = JFactory::getUser();
 
         $title = JText::_('COM_SITEAREAS_MANAGER_RECORDS');
@@ -69,46 +63,49 @@ class SiteAreasViewRecords extends JViewLegacy
             $title .= "<span style='font-size: 0.5em; vertical-align: middle;'> (" . $this->pagination->total . ")</span>";
         }
 
-        JToolBarHelper::title($title, 'record');
+        JToolBarHelper::title($title, 'sitearea');
         /*
-        JToolBarHelper::addNew('record.add');
+        JToolBarHelper::addNew('sitearea.add');
         if (!empty($this->items)) {
-            JToolBarHelper::editList('record.edit');
-            JToolBarHelper::deleteList('', 'records.delete');
+            JToolBarHelper::editList('sitearea.edit');
+            JToolBarHelper::deleteList('', 'siteareas.delete');
         }
         */
         if ($canDo->get('core.create') || count($user->getAuthorisedCategories('com_siteareas', 'core.create')) > 0) {
-            JToolbarHelper::addNew('record.add');
+            JToolbarHelper::addNew('sitearea.add');
         }
 
         if ($canDo->get('core.edit') || $canDo->get('core.edit.own'))
         {
-            JToolbarHelper::editList('record.edit');
+            JToolbarHelper::editList('sitearea.edit');
         }
 
         if ($canDo->get('core.edit.state'))
         {
-            JToolbarHelper::publish('records.publish', 'JTOOLBAR_PUBLISH', true);
-            JToolbarHelper::unpublish('records.unpublish', 'JTOOLBAR_UNPUBLISH', true);
-            //JToolbarHelper::custom('record.featured', 'featured.png', 'featured_f2.png', 'JFEATURE', true);
-            //JToolbarHelper::custom('record.unfeatured', 'unfeatured.png', 'featured_f2.png', 'JUNFEATURE', true);
-            //JToolbarHelper::archiveList('record.archive');
-            //JToolbarHelper::checkin('record.checkin');
+            JToolbarHelper::publish('siteareas.publish', 'JTOOLBAR_PUBLISH', true);
+            JToolbarHelper::unpublish('siteareas.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+            //JToolbarHelper::custom('sitearea.featured', 'featured.png', 'featured_f2.png', 'JFEATURE', true);
+            //JToolbarHelper::custom('sitearea.unfeatured', 'unfeatured.png', 'featured_f2.png', 'JUNFEATURE', true);
+            //JToolbarHelper::archiveList('sitearea.archive');
+            //JToolbarHelper::checkin('sitearea.checkin');
         }
 
 
         if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete'))
         {
-            JToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'records.delete', 'JTOOLBAR_EMPTY_TRASH');
+            JToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'siteareas.delete', 'JTOOLBAR_EMPTY_TRASH');
         }
         elseif ($canDo->get('core.edit.state'))
         {
-            JToolbarHelper::trash('records.trash');
+            JToolbarHelper::trash('siteareas.trash');
         }
 
-        JToolBarHelper::preferences('com_siteareas');
-
+        if ($user->authorise('core.admin', 'com_siteareas') || $user->authorise('core.options', 'com_siteareas'))
+        {
+            JToolbarHelper::preferences('com_siteareas');
+        }
     }
+
     /**
      * Method to set up the document properties
      *
@@ -118,5 +115,17 @@ class SiteAreasViewRecords extends JViewLegacy
     {
         $document = JFactory::getDocument();
         $document->setTitle(JText::_('COM_SITEAREAS_ADMINISTRATION'));
+    }
+
+    /**
+     * Returns an array of fields the table can be sorted by
+     *
+     * @return  array  Array containing the field name to sort by as the key and display text as value
+     */
+    protected function getSortFields()
+    {
+        return array(
+
+        );
     }
 }

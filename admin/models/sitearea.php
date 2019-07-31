@@ -55,16 +55,16 @@ class SiteAreasModelSiteArea extends JModelAdmin
             return false;
         }
 
-        // Determine correct permissions to check.
+            // Determine correct permissions to check.
         if ($this->getState('sitearea.id'))
         {
             // Existing record. Can only edit in selected categories.
-            $form->setFieldAttribute('catid', 'action', 'core.edit');
+            $form->setFieldAttribute('action', 'core.edit');
         }
         else
         {
             // New record. Can only create in selected categories.
-            $form->setFieldAttribute('catid', 'action', 'core.create');
+            $form->setFieldAttribute('action', 'core.create');
         }
 
         // Modify the form based on access controls.
@@ -104,38 +104,6 @@ class SiteAreasModelSiteArea extends JModelAdmin
 
         return $data;
     }
-
-    /**
-     * Method to get a single record.
-     *
-     * @param   integer  $pk  The id of the primary key.
-     *
-     * @return  mixed  Object on success, false on failure.
-     */
-    /*public function getItem($pk = null)
-    {
-        if ($item = parent::getItem($pk))
-        {
-            // Convert the metadata field to an array.
-            $registry = new Registry;
-            $registry->loadString($item->metadata);
-            $item->metadata = $registry->toArray();
-
-            // Convert the images field to an array.
-            $registry = new Registry;
-            $registry->loadString($item->images);
-            $item->images = $registry->toArray();
-
-            if (!empty($item->id))
-            {
-                $item->tags = new JHelperTags;
-                $item->tags->getTagIds($item->id, 'com_weblinks.weblink');
-                $item->metadata['tags'] = $item->tags;
-            }
-        }
-
-        return $item;
-    }*/
 
     /**
      * Prepare and sanitise the table data prior to saving.
@@ -190,24 +158,6 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $data['alias']    = $alias;
             $data['state']    = 0;
         }
-
-        /*if ($input->get('task') == 'save2copy') {
-            $origTable = clone $this->getTable();
-            $origTable->load($input->getInt('id'));
-
-            // Note is using custom category field name, you need to change 'catid':
-            if ($data['name'] == $origTable->name) {
-                list($name, $alias) = $this->generateNewBrandTitle($data['catid'], $data['alias'], $data['name']);
-                $data['name'] = $name;
-                $data['alias'] = $alias;
-            } else {
-                if ($data['alias'] == $origTable->alias) {
-                    $data['alias'] = '';
-                }
-            }
-
-            $data['state'] = 0;
-        }*/
 
         // Automatic handling of alias for empty fields
         // Taken from com_content/models/article.php
@@ -433,68 +383,4 @@ class SiteAreasModelSiteArea extends JModelAdmin
 
         return array($name, $alias);
     }
-
-    /**
-     * Copied from libraries/src/MVC/Model/AdminModel.php because it uses a hard-coded field name:
-     * catid.
-     *
-     * Method to change the title & alias.
-     *
-     * @param   string   $alias        The alias.
-     * @param   string   $name        The title.
-     *
-     * @return  array  Contains the modified title and alias.
-     */
-    /*protected function generateNewSiteAreasTitle($alias, $name)
-    {
-        // Alter the name & alias
-        $table = $this->getTable();
-
-        while ($table->load(array('alias' => $alias)))
-        {
-            $name = StringHelper::increment($name);
-            $alias = StringHelper::increment($alias, 'dash');
-        }
-
-        return array($name, $alias);
-    }*/
-
-
-    /**
-     * Method to get the script that have to be included on the form
-     *
-     * @return string   Script files
-     */
-    /*public function getScript()
-    {
-        #return 'administrator/components/com_helloworld/models/forms/helloworld.js';
-        return '';
-    }*/
-
-    /**
-     * Delete this if not needed. Here for reference.
-     * Method to get the data that should be injected in the form.
-     *
-     * @return  bool  Email success/failed to send.
-     */
-    /*private function _sendEmail($email_data)
-    {
-            $app        = JFactory::getApplication();
-            $mailfrom   = $app->getCfg('mailfrom');
-            $fromname   = $app->getCfg('fromname');
-            $sitename   = $app->getCfg('sitename');
-            $email      = JStringPunycode::emailToPunycode($email_data['email']);
-
-            // Ref: JText::sprintf('LANG_STR', $var, ...);
-
-            $mail = JFactory::getMailer();
-            $mail->addRecipient($email);
-            $mail->addReplyTo($mailfrom);
-            $mail->setSender(array($mailfrom, $fromname));
-            $mail->setSubject(JText::_('COM_ALERTS_EMAIL_ADMINS_SUBJECT'));
-            $mail->setBody(JText::_('COM_ALERTS_EMAIL_ADMINS_BODY'));
-            $sent = $mail->Send();
-
-            return $sent;
-    }*/
 }

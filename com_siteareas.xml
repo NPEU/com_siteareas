@@ -13,7 +13,7 @@
     <version>0.0.3</version>
     <!-- The description is optional and defaults to the name -->
     <description>COM_SITEAREAS_DESCRIPTION</description>
-
+    
     <updateservers>
         <!-- Note: No spaces or linebreaks allowed between the server tags -->
         <server type="extension" name="NPEU: com_siteareas Update Site">https://raw.githubusercontent.com/NPEU/com_siteareas/master/update-manifest.xml</server>
