@@ -24,89 +24,89 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
     public $type = 'RootMenuItem';
     
     /**
-	 * Exclude these groups.
-	 *
-	 * @var    array
-	 */
-	protected $exludeGroups;
+     * Exclude these groups.
+     *
+     * @var    array
+     */
+    protected $exludeGroups;
     
     /**
-	 * Method to get certain otherwise inaccessible properties from the form field object.
-	 *
-	 * @param   string  $name  The property name for which to get the value.
-	 *
-	 * @return  mixed  The property value or null.
-	 *
-	 * @since   3.2
-	 */
-	public function __get($name)
-	{
-		switch ($name)
-		{
-			case 'excludeGroups':
-				return $this->$name;
-		}
+     * Method to get certain otherwise inaccessible properties from the form field object.
+     *
+     * @param   string  $name  The property name for which to get the value.
+     *
+     * @return  mixed  The property value or null.
+     *
+     * @since   3.2
+     */
+    public function __get($name)
+    {
+        switch ($name)
+        {
+            case 'excludeGroups':
+                return $this->$name;
+        }
 
-		return parent::__get($name);
-	}
+        return parent::__get($name);
+    }
 
-
-	/**
-	 * Method to set certain otherwise inaccessible properties of the form field object.
-	 *
-	 * @param   string  $name   The property name for which to set the value.
-	 * @param   mixed   $value  The value of the property.
-	 *
-	 * @return  void
-	 *
-	 * @since   3.2
-	 */
-	public function __set($name, $value)
-	{
-		switch ($name)
-		{
-			case 'excludeGroups':
-				$this->excludeGroups = (array) $value;
-				break;
-
-			default:
-				parent::__set($name, $value);
-		}
-	}
 
     /**
-	 * Method to attach a JForm object to the field.
-	 *
-	 * @param   \SimpleXMLElement  $element  The SimpleXMLElement object representing the `<field>` tag for the form field object.
-	 * @param   mixed              $value    The form field value to validate.
-	 * @param   string             $group    The field name group control value. This acts as an array container for the field.
-	 *                                       For example if the field has name="foo" and the group value is set to "bar" then the
-	 *                                       full field name would end up being "bar[foo]".
-	 *
-	 * @return  boolean  True on success.
-	 *
-	 * @see     FormField::setup()
-	 * @since   3.2
-	 */
-	public function setup(\SimpleXMLElement $element, $value, $group = null)
-	{
-		$result = parent::setup($element, $value, $group);
+     * Method to set certain otherwise inaccessible properties of the form field object.
+     *
+     * @param   string  $name   The property name for which to set the value.
+     * @param   mixed   $value  The value of the property.
+     *
+     * @return  void
+     *
+     * @since   3.2
+     */
+    public function __set($name, $value)
+    {
+        switch ($name)
+        {
+            case 'excludeGroups':
+                $this->excludeGroups = (array) $value;
+                break;
 
-		if ($result === true)
-		{
-			$this->excludeGroups = explode(',', str_replace(', ', ',', $this->element['exclude_groups']));
-		}
+            default:
+                parent::__set($name, $value);
+        }
+    }
 
-		return $result;
-	}
+    /**
+     * Method to attach a JForm object to the field.
+     *
+     * @param   \SimpleXMLElement  $element  The SimpleXMLElement object representing the `<field>` tag for the form field object.
+     * @param   mixed              $value    The form field value to validate.
+     * @param   string             $group    The field name group control value. This acts as an array container for the field.
+     *                                       For example if the field has name="foo" and the group value is set to "bar" then the
+     *                                       full field name would end up being "bar[foo]".
+     *
+     * @return  boolean  True on success.
+     *
+     * @see     FormField::setup()
+     * @since   3.2
+     */
+    public function setup(\SimpleXMLElement $element, $value, $group = null)
+    {
+        $result = parent::setup($element, $value, $group);
 
-	/**
-	 * Method to get the field input markup.
-	 *
-	 * @return  string  The field input markup.
-	 */
-	protected function getInput()
-	{
+        if ($result === true)
+        {
+            $this->excludeGroups = explode(',', str_replace(', ', ',', $this->element['exclude_groups']));
+        }
+
+        return $result;
+    }
+
+    /**
+     * Method to get the field input markup.
+     *
+     * @return  string  The field input markup.
+     */
+    protected function getInput()
+    {
         $return   = array();
         $return[] = parent::getInput();
 
@@ -143,17 +143,17 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
         }
 
         return implode("\n", $return);
-	}
+    }
 
     /**
-	 * Method to get the field option groups.
-	 *
-	 * @return  array  The field option objects as a nested array in groups.
-	 *
-	 * @since   1.6
-	 */
-	protected function getGroups()
-	{
+     * Method to get the field option groups.
+     *
+     * @return  array  The field option objects as a nested array in groups.
+     *
+     * @since   1.6
+     */
+    protected function getGroups()
+    {
         $groups = parent::getGroups();
         
         // If an ID is already selected, we don't want the auto-generate option:

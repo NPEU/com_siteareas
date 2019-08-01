@@ -82,6 +82,17 @@
             label="COM_SITEAREAS_FIELDSET_OPTIONAL_LABEL"
         >
             <field
+                name="unit"
+                type="list"
+                default="npeu"
+                label="COM_SITEAREAS_UNIT_LABEL"
+                description="COM_SITEAREAS_UNIT_DESC"
+            >
+                <option value="npeu">NPEU</option>
+                <option value="npeu_ctu">NPEU CTU</option>
+                <option value="sheer">SHEER</option>
+            </field>
+            <field
                 name="root_catid"
                 type="rootcategory"
                 extension="com_content"

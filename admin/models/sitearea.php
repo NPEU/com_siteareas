@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\String\StringHelper;
+use Joomla\CMS\Factory;
 
 /**
  * SiteAreas SiteArea Model
@@ -94,7 +95,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
     {
         // Check the session for previously entered form data.
         $data = JFactory::getApplication()->getUserState(
-            'com_siteareas.edit.siteareas.data',
+            'com_siteareas.edit.sitearea.data',
             array()
         );
 
@@ -145,6 +146,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
         $is_new = empty($data['id']);
         $input  = JFactory::getApplication()->input;
         $app    = JFactory::getApplication();
+        $db     = Factory::getDbo();
 
         // Get parameters:
         $params = JComponentHelper::getParams(JRequest::getVar('option'));
@@ -297,6 +299,14 @@ class SiteAreasModelSiteArea extends JModelAdmin
 
 
         // Respond to Brand autogenerate:
+
+        // If we're going to generate a template-style (next), there HAS to be a brand.
+        // If one hasn't been selected, we'll force-generate one:
+    
+        if ($data['params']['template_style_id'] == 'autogenerate' && !is_numeric($data['params']['brand_id'])) {
+            $data['params']['brand_id'] = 'autogenerate';
+        }
+
         if ($data['params']['brand_id'] == 'autogenerate') {
             $new_brand = array();
             $new_brand['id'] = '';
@@ -332,14 +342,18 @@ class SiteAreasModelSiteArea extends JModelAdmin
 
             // Set the query and load the data.
             $db->setQuery($query);
-            $default_params = $db->loadResult();
+            $template_params = $db->loadResult();
+
+            $template_params['layout_name'] = 'structure--branded';
+            $template_params['brand_id']    = $data['params']['brand_id'];
+            $template_params['unit']        = $data['params']['unit'];
 
             $new_style = array();
             $new_style['template']  = $template_name;
             $new_style['client_id'] = '0';
             $new_style['home']      = '0';
             $new_style['title']     = $template_title . ' - ' . $data['name'];
-            $new_style['params']    = $default_params;
+            $new_style['params']    = $template_params;
 
             JLoader::import('style', JPATH_ADMINISTRATOR . '/components/com_templates/models');
             JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_templates/tables');

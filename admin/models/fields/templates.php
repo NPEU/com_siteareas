@@ -38,52 +38,52 @@ class JFormFieldTemplates extends JFormFieldList
      */
     protected function getOptions()
     {
-        
+
         $lang = Factory::getLanguage();
 
-		// Get the client and client_id.
-		$client = ApplicationHelper::getClientInfo('site', true);
+        // Get the client and client_id.
+        $client = ApplicationHelper::getClientInfo('site', true);
 
 
-		// Get the database object and a new query object.
-		$db = Factory::getDbo();
-		$query = $db->getQuery(true);
+        // Get the database object and a new query object.
+        $db = Factory::getDbo();
+        $query = $db->getQuery(true);
 
-		// Build the query.
-		$query->select('s.id, s.title, e.name as name, e.extension_id as ext_id, s.template')
-			->from('#__template_styles as s')
-			->where('s.client_id = ' . (int) $client->id)
-			->order('template')
-			->order('title');
+        // Build the query.
+        $query->select('s.id, s.title, e.name as name, e.extension_id as ext_id, s.template')
+            ->from('#__template_styles as s')
+            ->where('s.client_id = ' . (int) $client->id)
+            ->order('template')
+            ->order('title');
 
-		$query->join('LEFT', '#__extensions as e on e.element=s.template')
-			->where('e.enabled = 1')
-			->where($db->quoteName('e.type') . ' = ' . $db->quote('template'));
+        $query->join('LEFT', '#__extensions as e on e.element=s.template')
+            ->where('e.enabled = 1')
+            ->where($db->quoteName('e.type') . ' = ' . $db->quote('template'));
 
-		// Set the query and load the styles.
-		$db->setQuery($query);
-		$styles = $db->loadObjectList();
+        // Set the query and load the styles.
+        $db->setQuery($query);
+        $styles = $db->loadObjectList();
 
-		// Build the options array.
+        // Build the options array.
         $options = array();
         $templates = array();
-		if ($styles)
-		{
-			foreach ($styles as $style)
-			{
-				$template = $style->template;
-				$lang->load('tpl_' . $template . '.sys', $client->path, null, false, true)
-					|| $lang->load('tpl_' . $template . '.sys', $client->path . '/templates/' . $template, null, false, true);
-				$name = \JText::_($style->name);
+        if ($styles)
+        {
+            foreach ($styles as $style)
+            {
+                $template = $style->template;
+                $lang->load('tpl_' . $template . '.sys', $client->path, null, false, true)
+                    || $lang->load('tpl_' . $template . '.sys', $client->path . '/templates/' . $template, null, false, true);
+                $name = \JText::_($style->name);
 
                 if (in_array($name, $templates)) {
                     continue;
                 }
 
-				$options[] = \JHtml::_('select.option', $template . ',' . $style->ext_id . ',' . $name, $name);
+                $options[] = \JHtml::_('select.option', $template . ',' . $style->ext_id . ',' . $name, $name);
                 $templates[] = $name;
-			}
-		}
+            }
+        }
         return $options;
         /*
         $com_templates_path = JPATH_ADMINISTRATOR . '/components/com_templates/';
@@ -91,10 +91,10 @@ class JFormFieldTemplates extends JFormFieldList
         jimport('joomla.application.component.model');
         JModelLegacy::addIncludePath($com_templates_path  . 'models');
         $templates_model = JModelLegacy::getInstance('Templates', 'TemplatesModel');
-        
+
         $templates = $templates_model->getItems();
         echo '<pre>'; var_dump($templates); echo '</pre>'; exit;*/
-        
+
         /*
         $options = array();
         $db = JFactory::getDBO();

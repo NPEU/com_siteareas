@@ -104,23 +104,23 @@ class SiteAreasModelSiteAreas extends JModelList
         $query = $db->getQuery(true);
 
         // Select the required fields from the table.
-		$query->select(
-			$this->getState(
-				'list.select',
-				'a.id, a.name, a.alias, a.owner_user_id, a.checked_out, a.checked_out_time, a.created_by, a.state'
-			)
-		);
-		$query->from($db->quoteName('#__siteareas', 'a'));
+        $query->select(
+            $this->getState(
+                'list.select',
+                'a.id, a.name, a.alias, a.owner_user_id, a.checked_out, a.checked_out_time, a.created_by, a.state'
+            )
+        );
+        $query->from($db->quoteName('#__siteareas', 'a'));
 
         // Join over the users for the checked out user.
-		$query->select($db->quoteName('uc.name', 'editor'))
-			->join('LEFT', $db->quoteName('#__users', 'uc') . ' ON ' . $db->qn('uc.id') . ' = ' . $db->qn('a.checked_out'));
+        $query->select($db->quoteName('uc.name', 'editor'))
+            ->join('LEFT', $db->quoteName('#__users', 'uc') . ' ON ' . $db->qn('uc.id') . ' = ' . $db->qn('a.checked_out'));
 
         // Join over the users for the owner user.
-		$query->select($db->quoteName('o.name', 'owner_name'))
+        $query->select($db->quoteName('o.name', 'owner_name'))
             ->select($db->quoteName('o.username', 'owner_username'))
             ->select($db->quoteName('o.email', 'owner_email'))
-			->join('LEFT', $db->quoteName('#__users', 'o') . ' ON ' . $db->qn('o.id') . ' = ' . $db->qn('a.owner_user_id'));
+            ->join('LEFT', $db->quoteName('#__users', 'o') . ' ON ' . $db->qn('o.id') . ' = ' . $db->qn('a.owner_user_id'));
 
 
         // Filter: like / search
