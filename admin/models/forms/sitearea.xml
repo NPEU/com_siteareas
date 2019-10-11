@@ -7,6 +7,13 @@
         name="main"
         label="COM_SITEAREAS_FIELDSET_MAIN_LABEL"
     >
+        <field 
+            name="about_notice"
+            type="notice"
+            label="COM_SITEAREAS_ABOUT_NOTICE_LABEL"
+            message="COM_SITEAREAS_ABOUT_NOTICE_MESSAGE"
+            readonly="true"
+        />
         <field
             name="id"
             type="hidden"
@@ -58,7 +65,7 @@
             type="rootmenuitem"
             label="COM_SITEAREAS_ROOT_MENU_ITEM_LABEL"
             description="COM_SITEAREAS_ROOT_MENU_ITEM_DESC"
-            exclude_groups="User"
+            exclude_menus="_Main Menu, _User"
         >
             <option value="">COM_SITEAREAS_ROOT_MENU_ITEM_DEFAULT</option>
         </field>
@@ -88,7 +95,7 @@
                 label="COM_SITEAREAS_UNIT_LABEL"
                 description="COM_SITEAREAS_UNIT_DESC"
             >
-                <option value="npeu">NPEU</option>
+                <option value="npeu">NPEU (including PRU-MNHC)</option>
                 <option value="npeu_ctu">NPEU CTU</option>
                 <option value="sheer">SHEER</option>
             </field>
@@ -102,8 +109,8 @@
                 exclude_categories="Uncategorised,Archive,Announcements,Reports"
                 published="1"
             >
-                <option value="">COM_SITEAREAS_CATEGORY_DEFAULT</option>
-                <option value="autogenerate">COM_SITEAREAS_CATEGORY_AUTO</option>
+                <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
             </field>
             <field
                 name="brand_id"
@@ -112,8 +119,8 @@
                 description="COM_SITEAREAS_BRAND_DESC"
                 default=""
             >
-                <option value="">COM_SITEAREAS_BRAND_DEFAULT</option>
-                <option value="autogenerate">COM_SITEAREAS_BRAND_AUTO</option>
+                <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
             </field>
             <field
                 name="template_style_id"
@@ -122,8 +129,30 @@
                 description="COM_SITEAREAS_TEMPLATE_STYLE_DESC"
                 default=""
             >
-                <option value="">COM_SITEAREAS_TEMPLATE_STYLE_DEFAULT</option>
-                <option value="autogenerate">COM_SITEAREAS_TEMPLATE_STYLE_AUTO</option>
+                <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+            </field>
+            <field
+                name="navbar_id"
+                type="module"
+                label="COM_SITEAREAS_NAVBAR_LABEL"
+                description="COM_SITEAREAS_NAVBAR_DESC"
+                moduletype="mod_menu"
+                header="Select module"
+            >
+                <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+            </field>
+            <field
+                name="section_menu_module_id"
+                type="module"
+                label="COM_SITEAREAS_SECTION_MENU_LABEL"
+                description="COM_SITEAREAS_SECTION_MENU_DESC"
+                moduletype="mod_menu"
+                header="Select module"
+            >
+                <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
             </field>
         </fieldset>
     </fields>

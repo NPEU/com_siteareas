@@ -41,7 +41,7 @@ class JFormFieldAdminGroup extends JFormFieldUsergrouplist
 
         if (!empty($this->value)) {
             $return[] = '<div style="margin: 1em 0 0 0;">';
-            $return[] = '    <a href="/administrator/index.php?option=com_users&view=group&layout=edit&id=' . $this->value . '" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_ADMIN_GROUP_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
+            $return[] = '    <a href="/administrator/index.php?option=com_users&task=group.edit&id=' . $this->value . '" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_ADMIN_GROUP_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
             $return[] = '</div>';
 
             // Check this is a valid component menu item type:

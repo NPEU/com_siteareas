@@ -127,7 +127,7 @@ class SiteAreasViewSiteAreas extends JViewLegacy
         return array(
             'a.name' => JText::_('COM_SITEAREAS_RECORDS_NAME'),
             'a.owner_user_id' => JText::_('COM_SITEAREAS_RECORDS_OWNER'),
-            'a.state' => JText::_('COM_SITEAREAS_PUBLISHED'), 
+            'a.state' => JText::_('COM_SITEAREAS_PUBLISHED'),
             'a.id'    => JText::_('COM_SITEAREAS_ID')
         );
     }

@@ -22,28 +22,26 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
      * @var     string
      */
     public $type = 'RootMenuItem';
-    
+
     /**
      * Exclude these groups.
      *
      * @var    array
      */
-    protected $exludeGroups;
-    
+    protected $excludeMenus;
+
     /**
      * Method to get certain otherwise inaccessible properties from the form field object.
      *
      * @param   string  $name  The property name for which to get the value.
      *
      * @return  mixed  The property value or null.
-     *
-     * @since   3.2
      */
     public function __get($name)
     {
         switch ($name)
         {
-            case 'excludeGroups':
+            case 'excludeMenus':
                 return $this->$name;
         }
 
@@ -58,15 +56,13 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
      * @param   mixed   $value  The value of the property.
      *
      * @return  void
-     *
-     * @since   3.2
      */
     public function __set($name, $value)
     {
         switch ($name)
         {
-            case 'excludeGroups':
-                $this->excludeGroups = (array) $value;
+            case 'excludeMenus':
+                $this->excludeMenus = (array) $value;
                 break;
 
             default:
@@ -86,7 +82,6 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
      * @return  boolean  True on success.
      *
      * @see     FormField::setup()
-     * @since   3.2
      */
     public function setup(\SimpleXMLElement $element, $value, $group = null)
     {
@@ -94,7 +89,7 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
 
         if ($result === true)
         {
-            $this->excludeGroups = explode(',', str_replace(', ', ',', $this->element['exclude_groups']));
+            $this->excludeMenus = explode(',', str_replace(', ', ',', $this->element['exclude_menus']));
         }
 
         return $result;
@@ -112,7 +107,7 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
 
         if (!empty($this->value)) {
             $return[] = '<div style="margin: 1em 0 0 0;">';
-            $return[] = '    <a href="/administrator/index.php?option=com_menus&view=item&client_id=0&layout=edit&id=' . $this->value . '" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_ROOT_MENU_ITEM_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
+            $return[] = '    <a href="/administrator/index.php?option=com_menus&task=item.edit&id=' . $this->value . '" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_ROOT_MENU_ITEM_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
             $return[] = '</div>';
 
             // Check this is a valid component menu item type:
@@ -135,7 +130,9 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
             }
 
             if ($menuitem->published != '1') {
-
+                if ($menuitem->type != 'component') {
+                    $return[] = '<br>';
+                }
                 $return[] = '<div class="alert  alert-info" style="margin: 1em 0 0 0; display: inline-block;">';
                 $return[] = '    ' . JText::_('COM_SITEAREAS_ROOT_MENU_ITEM_PUB_MSG');
                 $return[] = '</div>';
@@ -149,21 +146,19 @@ class JFormFieldRootMenuItem extends JFormFieldMenuitem
      * Method to get the field option groups.
      *
      * @return  array  The field option objects as a nested array in groups.
-     *
-     * @since   1.6
      */
     protected function getGroups()
     {
         $groups = parent::getGroups();
-        
+
         // If an ID is already selected, we don't want the auto-generate option:
         if (!empty($this->value)) {
             unset($groups[0]);
         }
-        
+
         // Remove any groups specified in the exclude list:
-        if (!empty($this->excludeGroups)) {
-            foreach ($this->excludeGroups as $group) {
+        if (!empty($this->excludeMenus)) {
+            foreach ($this->excludeMenus as $group) {
                 if (array_key_exists($group, $groups)) {
                     unset($groups[$group]);
                 }

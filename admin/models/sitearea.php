@@ -231,8 +231,24 @@ class SiteAreasModelSiteArea extends JModelAdmin
         //962 mainmenu    Test Placeholder    test-placeholder    ""  test-placeholder    ""  heading 0   1   1   0   0   29/12/1899  0   1   ""  0   "{""menu-anchor_title"":"""",""menu-anchor_css"":"""",""menu_image"":"""",""menu_image_css"":"""",""menu_text"":1,""menu_show"":1}" 1359    1360    0   *   0
         //$link = 'index.php?option=com_content&view=article&id='.$resultID,
         if (empty($data['root_menu_item_id'])) {
-           $menuItem = array(
-                'menutype'     => 'mainmenu',
+            // Generate a new menu:
+            $menType = array(
+                'menutype'     => $data['alias'],
+                'title'        => $data['name'],
+                'client_id'    => 0
+            );
+
+            $menuTypesTable = JTable::getInstance('MenuType', 'JTable', array());
+
+
+            if (!$menuTypesTable->save($menType)) {
+                throw new Exception($menuTypesTable->getError());
+                return false;
+            }
+
+            // Generate a stub for that menu:
+            $menuItem = array(
+                'menutype'     => $menuTypesTable->menutype,
                 'title'        => $data['name'],
                 'alias'        => $data['alias'],
                 'path'         => $data['alias'],
@@ -258,7 +274,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
         }
 
 
-        // Respond to Category autogenerate:
+        // Respond to Category auto-generate:
         if ($data['params']['root_catid'] == 'autogenerate') {
             // JTableCategory is autoloaded in J! 3.0, so...
             if (version_compare(JVERSION, '3.0', 'lt')) {
@@ -298,11 +314,11 @@ class SiteAreasModelSiteArea extends JModelAdmin
         }
 
 
-        // Respond to Brand autogenerate:
+        // Respond to Brand auto-generate:
 
         // If we're going to generate a template-style (next), there HAS to be a brand.
         // If one hasn't been selected, we'll force-generate one:
-    
+
         if ($data['params']['template_style_id'] == 'autogenerate' && !is_numeric($data['params']['brand_id'])) {
             $data['params']['brand_id'] = 'autogenerate';
         }
@@ -326,8 +342,12 @@ class SiteAreasModelSiteArea extends JModelAdmin
         }
 
 
-        // Respond to Template Style autogenerate:
+        // Respond to Template Style auto-generate:
         if ($data['params']['template_style_id'] == 'autogenerate') {
+            // This should trigger generation of navigation modules:
+            $data['params']['navbar_id'] = 'autogenerate';
+            $data['params']['section_menu_id'] = 'autogenerate';
+
             // Get the base template params:
             $template        = explode(',', $params->get('template'));
             $template_name   = $template[0];

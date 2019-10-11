@@ -37,10 +37,6 @@ class JFormFieldStaff extends JFormFieldList
      */
     protected function getOptions()
     {
-        // Load  language in case this is used for other extensions
-        $lang = JFactory::getLanguage();
-        $lang->load('com_siteareas', JPATH_ADMINISTRATOR);
-
         $options = array();
         $db = JFactory::getDBO();
         $q  = 'SELECT u.id, u.name, up1.profile_value AS first_name, up2.profile_value AS last_name FROM `#__users` u ';
