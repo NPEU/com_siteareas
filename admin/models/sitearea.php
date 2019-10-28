@@ -298,6 +298,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
 
             // Initialize a new category
             $category = JTable::getInstance('Category');
+            $category->parent_id = 1;
             $category->extension = 'com_content';
             $category->title = $data['name'];
             $category->alias = $data['alias'];
@@ -308,8 +309,19 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $category->metadata = '{"author":"","robots":""}';
             $category->language = '*';
 
-            // Set the location in the tree
-            $category->setLocation(1, 'last-child');
+            // Set the location in the tree:
+            // First we need to the ID of the row that will come before it:
+            $query = $db->getQuery(true);
+            $query->select($query->qn('id'))
+                  ->from($query->qn('#__categories'))
+                  ->where($query->qn('title') .' < ' . $query->q($data['name']))
+                  ->andWhere($query->qn('level') .' = 1')
+                  ->order('title DESC')
+                  ->setLimit('1');
+            $db->setQuery($query);
+            $ref_id = $db->loadResult();
+            
+            $category->setLocation($ref_id, 'after');
 
             // Check to make sure our data is valid
             if (!$category->check()) {
@@ -328,10 +340,11 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $data['params']['root_catid'] = (string) $category->id;
         }
 
-        // If the category was simply selected, check for a News category, and make one if not
+        // If there's a category was simply selected, check for a News category, and make one if not
         // found:
-        /*if ($data['params']['root_catid'] == 'autogenerate' || is_numeric($data['params']['root_catid'])) {
+        if ($data['params']['news_catid'] == 'autogenerate') {
 
+            // Check if a news category already exists, and select it if it does:
             $query = $db->getQuery(true);
             $query->select($query->qn('id'))
                   ->from($query->qn('#__categories'))
@@ -340,12 +353,14 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $db->setQuery($query);
             $news_cat_id = $db->loadResult();
 
-            if (!$news_cat_id) {
+            if ($news_cat_id) {
+                $data['params']['news_catid'] = $news_cat_id;
+            } else {
                 // Generate a news category.
                 // It may not be used, but can always be deleted, which is less of a pain than if it
                 // is needed and it's not there.
                 $news_category = JTable::getInstance('Category');
-                $category->parent_id = $data['params']['root_catid'] ;
+                $news_category->parent_id = $data['params']['root_catid'];
                 $news_category->extension = 'com_content';
                 $news_category->title = $data['name'] . ' News';
                 $news_category->alias = 'news';
@@ -357,7 +372,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
                 $news_category->language = '*';
 
                 // Set the location in the tree
-                $news_category->setLocation(1, 'last-child');
+                $news_category->setLocation($data['params']['root_catid'], 'last-child');
 
                 // Check to make sure our data is valid
                 if (!$news_category->check()) {
@@ -373,34 +388,19 @@ class SiteAreasModelSiteArea extends JModelAdmin
 
                 // Build the path for our category
                 $news_category->rebuildPath($news_category->id);
-                $data['params']['news_catid'] = (string) $category->id;
+                $data['params']['news_catid'] = (string) $news_category->id;
 
             }
-        }*/
+        }
 
 
         // Respond to Brand auto-generate:
-
-        // If we're going to generate a template-style (next), there HAS to be a brand.
-        // If one hasn't been selected, we'll force-generate one:
-
-        if ($data['params']['template_style_id'] == 'autogenerate' && !is_numeric($data['params']['brand_id'])) {
-            $data['params']['brand_id'] = 'autogenerate';
-        }
-
         if ($data['params']['brand_id'] == 'autogenerate') {
             $new_brand = array();
             $new_brand['id'] = null;
             $new_brand['name'] = $data['name'];
             $new_brand['alias'] = $data['alias'];
             $new_brand['catid'] = '151';
-            /*$new_brand['primary_colour'] = null;
-            $new_brand['secondary_colour'] = null;
-            $new_brand['tertiary_colour'] = null;
-            $new_brand['logo_svg'] = null;
-            $new_brand['logo_svg_with_fallback'] = null;
-            $new_brand['logo_svg_path'] = null;
-            $new_brand['logo_png_path'] = null;*/
 
             // Saving a new Brand via the Brand Model doesn't work properly because there's a State
             // conflict, and it ends up updating an existing Brand based on the Site Area id.
@@ -474,8 +474,6 @@ class SiteAreasModelSiteArea extends JModelAdmin
             }
 
             $data['params']['template_style_id'] = (string) $templateStylesModel->getState('style.id');
-
-
         }
 
         // MODULES
@@ -496,7 +494,6 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['access']    = 1;
             $module['showtitle'] = 0;
             $module['params']    = json_decode('{"menutype":"' . $data['alias'] . '","base":"","startLevel":2,"endLevel":0,"showAllChildren":1,"tag_id":"","class_sfx":"","window_open":"","layout":"npeu6:Navbar","moduleclass_sfx":"","cache":1,"cache_time":900,"cachemode":"itemid","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"","cta_url":"","wrapper":"","theme":"","headline_image":""}', true);
-
 
             $moduleModel->setState('module.id', 0);
             $t_pk = \JFactory::getApplication()->input->getInt('id');

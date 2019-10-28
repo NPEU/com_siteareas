@@ -171,6 +171,12 @@ class JFormFieldChildCategory extends JFormFieldCategory
         // Only keep options that are in our specified parent category:
         $capturing = false;
         foreach ($options as $i => $option) {
+            #echo $option->text . "<br>";
+            // Allow the manual option through:
+            if ($option->text == JText::_('COM_SITEAREAS_SELECT_DEFAULT') || $option->text == JText::_('COM_SITEAREAS_SELECT_AUTO')) {
+                continue;
+            }
+
             // Matches parent:
             if ($option->text == $this->parentCategoryText) {
                 // Delete the option:
