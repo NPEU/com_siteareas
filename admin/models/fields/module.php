@@ -1,5 +1,3 @@
-
-
 <?php
 /**
  * @package     Joomla.Administrator
@@ -38,7 +36,7 @@ class JFormFieldModule extends JFormFieldSQL
      *
      * @var    string
      */
-    protected $query_template = "SELECT id, CONCAT(title, IF(LENGTH(`note`), CONCAT(' (', `note`, ')'), '')) AS title FROM #__modules WHERE module = '%s' ORDER BY title";
+    protected $query_template = "SELECT id, CONCAT(title, IF(LENGTH(`note`), CONCAT(' (', `note`, ')'), ''), IF(LENGTH(`position`), CONCAT(' (', `position`, ')'), '')) AS title FROM #__modules WHERE module = '%s' AND published = 1 ORDER BY title";
 
     /**
      * Method to get certain otherwise inaccessible properties from the form field object.
@@ -129,7 +127,7 @@ class JFormFieldModule extends JFormFieldSQL
 
         if (!empty($this->value)) {
             $return[] = '<div style="margin: 1em 0 0 0;">';
-            $return[] = '    <a href="' . JRoute::_('https://dev.npeu.ox.ac.uk/administrator/index.php?option=com_modules&task=module.edit&id=' . $this->value) .'" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_MODULE_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
+            $return[] = '    <a href="' . JRoute::_('/administrator/index.php?option=com_modules&task=module.edit&id=' . $this->value) .'" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_MODULE_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
             $return[] = '</div>';
         }
 
