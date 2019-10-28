@@ -79,8 +79,8 @@ class JFormFieldAdminGroup extends JFormFieldUsergrouplist
     /**
      * This method is copied from the parent class:
      * UsergrouplistField (/libraries/src/Form/Field/UsergrouplistField.php)
-     * This is because I'm not realy sure how modifying the static options returned from that methof
-     * affects things, so I thought it safest just to copy it.
+     * This is because I'm not really sure how modifying the static options returned from that 
+     * method affects things, so I thought it safest just to copy it.
      * Changes made are indicated.
      *
      * Method to get the options to populate list
@@ -167,6 +167,10 @@ class JFormFieldAdminGroup extends JFormFieldUsergrouplist
             static::$options[$hash] = array_merge(static::$options[$hash], $options);
         }
 
+        // If an ID is already selected, we don't want the auto-generate option:
+        if (!empty($this->value)) {
+            unset(static::$options[$hash][0]);
+        }
         return static::$options[$hash];
     }
 }

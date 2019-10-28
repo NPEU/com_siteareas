@@ -9,13 +9,6 @@
 
 defined('_JEXEC') or die;
 
-
-/*
-    IMPORTANT = this field has an UNPROTECTED dependancy on the FirstLastNames plugin.
-    This extension will break of that's not installed and enabled.
-*/
-
-
 JFormHelper::loadFieldClass('list');
 
 /**
@@ -77,7 +70,7 @@ class JFormFieldBrand extends JFormFieldList
 
         if (!empty($this->value)) {
             $return[] = '<div style="margin: 1em 0 0 0;">';
-            $return[] = '    <a href="/administrator/index.php?option=com_brands&task=record.edit&id=' . $this->value . '" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_BRAND_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
+            $return[] = '    <a href="/administrator/index.php?option=com_brands&task=brand.edit&id=' . $this->value . '" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_BRAND_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
             $return[] = '</div>';
         }
 

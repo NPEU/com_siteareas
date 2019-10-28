@@ -14,21 +14,30 @@ JFormHelper::loadFieldClass('list');
 /**
  * Form field for a list of categories with link to edit category.
  */
-class JFormFieldRootCategory extends JFormFieldCategory
+class JFormFieldChildCategory extends JFormFieldCategory
 {
     /**
      * The form field type.
      *
      * @var    string
      */
-    public $type = 'RootCategory';
+    public $type = 'ChildCategory';
 
     /**
-     * Exclude these groups.
+     * Parent category field name/id.
      *
      * @var    array
      */
-    protected $excludeCategories = array();
+    protected $parentCategoryFieldname;
+
+
+    /**
+     * Parent category field text.
+     *
+     * @var    array
+     */
+    protected $parentCategoryText;
+
 
     /**
      * Method to get certain otherwise inaccessible properties from the form field object.
@@ -41,7 +50,7 @@ class JFormFieldRootCategory extends JFormFieldCategory
     {
         switch ($name)
         {
-            case 'excludeCategories':
+            case 'parentCategoryText':
                 return $this->$name;
         }
 
@@ -61,8 +70,8 @@ class JFormFieldRootCategory extends JFormFieldCategory
     {
         switch ($name)
         {
-            case 'excludeCategories':
-                $this->excludeCategories = (array) $value;
+            case 'parentCategoryText':
+                $this->parentCategoryText = (array) $value;
                 break;
 
             default:
@@ -85,11 +94,31 @@ class JFormFieldRootCategory extends JFormFieldCategory
      */
     public function setup(\SimpleXMLElement $element, $value, $group = null)
     {
+        $parent_category_fieldname = (string) $element->attributes()->parent_category;
+        $this->parentCategoryFieldname = $parent_category_fieldname;
+
+        // A root category has to have been created in order to create a news category:
+        $parent_category_id = $this->form->getValue($parent_category_fieldname, 'params');
+        $parent_category_field = $this->form->getField($parent_category_fieldname, 'params');
+        $parent_category_field_text = false;
+
+        // We need to loop through the options for find on that matches the correct value:
+        foreach ($parent_category_field->getOptions() as $option) {
+            if ($option->value === $parent_category_id) {
+                $parent_category_field_text = $option->text;
+                break;
+            }
+        }
+
+        if (!$parent_category_field_text) {
+            $element->addAttribute('disabled', 'true');
+        }
+
         $result = parent::setup($element, $value, $group);
 
         if ($result === true)
         {
-            $this->excludeCategories = explode(',', str_replace(', ', ',', $this->element['exclude_categories']));
+            $this->parentCategoryText = $parent_category_field_text;
         }
 
         return $result;
@@ -105,6 +134,13 @@ class JFormFieldRootCategory extends JFormFieldCategory
     {
         $return   = array();
         $return[] = parent::getInput();
+
+        /*
+        The Edit Category link shows an error "You are not permitted to use that link to directly access that page (#139)."
+        and won't open the category unless it's already recently opened.
+        Not sure how to fix this so leaving off for now.
+        Note I've looked at how the com_categories is set up and I can't see how this is being achieved.
+        */
 
         if (!empty($this->value)) {
             $return[] = '<div style="margin: 1em 0 0 0;">';
@@ -132,18 +168,40 @@ class JFormFieldRootCategory extends JFormFieldCategory
             unset($options[1]);
         }
 
+        // Only keep options that are in our specified parent category:
+        $capturing = false;
         foreach ($options as $i => $option) {
-            // Remove any options that aren't top-level:
-            // Note this could be adapted to allow a level to be set on the form element, but I don't
-            // need that right now.
-            if (strpos($option->text, '- ') === 0) {
+            // Matches parent:
+            if ($option->text == $this->parentCategoryText) {
+                // Delete the option:
                 unset($options[$i]);
+                // Start capturing:
+                $capturing = true;
+                // Next!
+                continue;
             }
 
-            // Remove any groups specified in the exclude list:
-            if (in_array($option->text, $this->excludeCategories)) {
+            // Not capturing:
+            if (!$capturing) {
+                // Delete the option:
                 unset($options[$i]);
+                // Next!
+                continue;
             }
+
+            // Currently capturing, are we back to top-level categories?
+            if ($capturing && strpos($option->text, '- ') === false) {
+                // Delete the option:
+                unset($options[$i]);
+                // Stop capturing:
+                $capturing = false;
+                // Next!
+                continue;
+            }
+
+            // If we got this far we should be 'inside' the correct parent category, so we want to
+            // keep those options:
+            continue;
         }
 
         return $options;

@@ -38,7 +38,7 @@ class JFormFieldModule extends JFormFieldSQL
      *
      * @var    string
      */
-    protected $query_template = "SELECT id, title FROM #__modules WHERE module = '%s' ORDER BY title";
+    protected $query_template = "SELECT id, CONCAT(title, IF(LENGTH(`note`), CONCAT(' (', `note`, ')'), '')) AS title FROM #__modules WHERE module = '%s' ORDER BY title";
 
     /**
      * Method to get certain otherwise inaccessible properties from the form field object.
@@ -121,7 +121,6 @@ class JFormFieldModule extends JFormFieldSQL
         $return[] = parent::getInput();
 
         /*
-
         The Edit Cateogy link shows an error "You are not permitted to use that link to directly access that page (#139)."
         and won't open the category unless it's already recently opened.
         Not sure how to fix this so leaving off for now.

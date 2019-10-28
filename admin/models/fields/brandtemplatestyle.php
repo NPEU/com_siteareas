@@ -39,6 +39,12 @@ class JFormFieldBrandTemplateStyle extends JFormFieldTemplatestyle
      */
     public function setup(\SimpleXMLElement $element, $value, $group = null)
     {
+        // A brand has to have been created in order to create a branded template:
+        $brand_id = $this->form->getValue('brand_id', 'params');
+        if (empty($brand_id)) {
+            $element->addAttribute('disabled', 'true');
+        }
+        
         $result = parent::setup($element, $value, $group);
 
         if ($result === true)
@@ -63,7 +69,7 @@ class JFormFieldBrandTemplateStyle extends JFormFieldTemplatestyle
 
         if (!empty($this->value)) {
             $return[] = '<div style="margin: 1em 0 0 0;">';
-            $return[] = '    <a href="/administrator/index.php?option=com_menus&task=item.edit&id=' . $this->value . '" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_ROOT_MENU_ITEM_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
+            $return[] = '    <a href="/administrator/index.php?option=com_templates&task=style.edit&id=' . $this->value . '" target="_blank" class="btn  btn-primary">' . JText::_('COM_SITEAREAS_TEMPLATE_STYLE_EDIT_LINK') . ' <span class="icon-out-2" aria-hidden="true"></span></a>';
             $return[] = '</div>';
         }
 
