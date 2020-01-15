@@ -645,7 +645,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['module']     = 'mod_text';
             $module['access']     = 1;
             $module['showtitle']  = 0;
-            $module['params']     = json_decode('{"cta_text":"Find out more","cta_url":"https:\/\/www.npeu.ox.ac.uk\/' . $data['alias'] . '\/parents","module_tag":"div","bootstrap_size":"0","header_tag":"h1","header_class":"","style":"0","wrapper":"","theme":"","headline_image":""}', true);
+            $module['params']     = json_decode('{"cta_text":"Find out more","cta_url":"https:\/\/www.npeu.ox.ac.uk\/' . $data['alias'] . '\/parents","cta_position":"bottom","module_tag":"div","bootstrap_size":"0","header_tag":"h1","header_class":"","style":"0","wrapper":"panel_longform","theme":"white","headline_image":""}', true);
 
             $moduleModel->setState('module.id', 0);
             $t_pk = \JFactory::getApplication()->input->getInt('id');
