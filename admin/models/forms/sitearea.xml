@@ -182,6 +182,17 @@
                 <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
             </field>
             <field
+                name="funder_module_id"
+                type="module"
+                label="COM_SITEAREAS_FUNDER_LABEL"
+                description="COM_SITEAREAS_FUNDER_DESC"
+                moduletype="mod_funder"
+                header="Select module"
+            >
+                <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+            </field>
+            <field
                 name="latest_update_module_id"
                 type="module"
                 label="COM_SITEAREAS_LATEST_UPDATE_LABEL"

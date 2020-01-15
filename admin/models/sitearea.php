@@ -537,6 +537,32 @@ class SiteAreasModelSiteArea extends JModelAdmin
         }
 
         // Respond to generating these modules:
+        
+        // Funder modules (appears on all pages)
+        if ($data['params']['funder_module_id'] == 'autogenerate') {
+
+            $module = array();
+            $module['assignment'] = $data['root_menu_item_id'];
+            $module['title']      = $data['name'] . ' funder';
+            $module['ordering']   = 1;
+            $module['position']   = '6-footer-top';
+            $module['published']  = 1;
+            $module['module']     = 'mod_funder';
+            $module['access']     = 1;
+            $module['showtitle']  = 0;
+            $module['params']     = json_decode('{"brand_id":"2","brand_url":"https:\/\/www.nihr.ac.uk\/funding-and-support\/funding-for-research-studies\/funding-programmes\/health-technology-assessment\/","statement":"<p class=\"c-utilitext\">This study is funded by the National Institute for Health Research (NIHR) <a href=\"http:\/\/www.nihr.ac.uk\/funding-and-support\/funding-for-research-studies\/funding-programmes\/health-technology-assessment\/\" rel=\"external nofollow noreferrer\">Health Technology Assessment (HTA) Programme<\/a> (Reference Number [CHANGE ME]). The views expressed are those of the author(s) and not necessarily those of the NIHR or the Department of Health and Social Care.<\/p>\r\n","image":"img\/baby-asleep-198666544.jpg","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"","cta_url":"","wrapper":"","theme":"","headline_image":""}', true);
+
+            $moduleModel->setState('module.id', 0);
+            $t_pk = \JFactory::getApplication()->input->getInt('id');
+            \JFactory::getApplication()->input->set('id', 0);
+            if (!$moduleModel->save($module)) {
+
+                JFactory::getApplication()->enqueueMessage($moduleModel->getError());
+                return false;
+            }
+            \JFactory::getApplication()->input->set('id', $t_pk);
+            $data['params']['funder_module_id'] = (string) $moduleModel->getState('module.id');
+        }
 
         // Latest update (appears on most pages)
         if ($data['params']['latest_update_module_id'] == 'autogenerate') {
