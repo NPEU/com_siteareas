@@ -30,9 +30,10 @@ class JFormFieldBrand extends JFormFieldList
      */
     protected function getOptions()
     {
+        $params  = clone JComponentHelper::getParams('com_siteareas');
         $options = array();
         $db = JFactory::getDBO();
-        $q  = 'SELECT id, name FROM #__brands WHERE catid = 151 ORDER BY name';
+        $q  = 'SELECT id, name FROM #__brands WHERE catid = ' . $params->get('brand_category_id') . ' ORDER BY name';
 
 
         $db->setQuery($q);

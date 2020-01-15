@@ -14,6 +14,13 @@
                 label="COM_SITEAREAS_CONFIG_TEMPLATE_LABEL"
                 description="COM_SITEAREAS_CONFIG_TEMPLATE_DESC"
             />
+            <field
+                name="brand_category_id"
+                type="category"
+                label="COM_SITEAREAS_CONFIG_BRAND_CAT_LABEL"
+                description="COM_SITEAREAS_CONFIG_BRAND_CAT_DESC"
+                extension="com_brands"
+            />
         </fieldset>
         <fieldset name="permissions"
             description="JCONFIG_PERMISSIONS_DESC"
