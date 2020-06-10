@@ -8,7 +8,6 @@
  */
 
 defined('_JEXEC') or die;
-ini_set('display_errors', 'on');
 
 use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\Factory;
