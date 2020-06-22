@@ -208,4 +208,20 @@
             <tag>stable</tag>
         </tags>
     </update>
+    <update>
+        <name>NPEU: com_siteareas</name>
+        <description>Joomla! com_siteareas component</description>
+        <element>com_siteareas</element>
+        <type>component</type>
+        <version>1.8.0</version>
+        <client>administrator</client>
+        <infourl title="NPEU: com_siteareas">https://github.com/NPEU/com_siteareas/releases/tag/v1.8.0</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/NPEU/com_siteareas/archive/v1.8.0.zip</downloadurl>
+        </downloads>
+        <targetplatform name="joomla" />
+        <tags>
+            <tag>stable</tag>
+        </tags>
+    </update>
 </updates>
