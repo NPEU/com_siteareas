@@ -36,7 +36,7 @@ class JFormFieldModule extends JFormFieldSQL
      *
      * @var    string
      */
-    protected $query_template = "SELECT id, CONCAT(title, IF(LENGTH(`note`), CONCAT(' (', `note`, ')'), ''), IF(LENGTH(`position`), CONCAT(' (', `position`, ')'), '')) AS title FROM #__modules WHERE module = '%s' AND published = 1 ORDER BY title";
+    protected $query_template = "SELECT id, CONCAT(title, IF(LENGTH(`note`), CONCAT(' (', `note`, ')'), ''), IF(LENGTH(`position`), CONCAT(' (', `position`, ')'), '')) AS title FROM #__modules WHERE module = '%s' AND published IN (0,1) ORDER BY title";
 
     /**
      * Method to get certain otherwise inaccessible properties from the form field object.
