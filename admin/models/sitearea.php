@@ -323,7 +323,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
                   ->setLimit('1');
             $db->setQuery($query);
             $ref_id = $db->loadResult();
-            
+
             $category->setLocation($ref_id, 'after');
 
             // Check to make sure our data is valid
@@ -400,14 +400,14 @@ class SiteAreasModelSiteArea extends JModelAdmin
         // Respond to Brand auto-generate:
         if ($data['params']['brand_id'] == 'autogenerate') {
             $new_brand = array();
-            $new_brand['id'] = null;
-            $new_brand['name'] = $data['name'];
+            $new_brand['id']    = null;
+            $new_brand['name']  = $data['name'];
             $new_brand['alias'] = $data['alias'];
-            $new_brand['catid'] = '151';
+            $new_brand['catid'] = $params->get('brand_category_id');
 
             // Saving a new Brand via the Brand Model doesn't work properly because there's a State
             // conflict, and it ends up updating an existing Brand based on the Site Area id.
-            // So, we need to temporarily record the input, override it and the set it back whern
+            // So, we need to temporarily record the input, override it and the set it back when
             // we're done:
             $this->setState('brand.id', 0);
             $t_pk = \JFactory::getApplication()->input->getInt('id');
@@ -467,16 +467,31 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $new_style['title']     = $template_title . ' - ' . $data['name'];
             $new_style['params']    = $template_params;
 
+#echo '<pre>'; var_dump($new_style); echo '</pre>'; exit;
+
+            // State id problem similar to Brand above, so temporarily overriding the state id:
+            $this->setState('style.id', 0);
+            $t_pk = \JFactory::getApplication()->input->getInt('id');
+            \JFactory::getApplication()->input->set('id', 0);
+
             JLoader::import('style', JPATH_ADMINISTRATOR . '/components/com_templates/models');
             JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_templates/tables');
             $templateStylesModel = JModelLegacy::getInstance('Style', 'TemplatesModel');
 
             if (!$templateStylesModel->save($new_style)) {
-               JFactory::getApplication()->enqueueMessage($templateStylesModel->getError());
-               return false;
-            }
+                $lang = JFactory::getLanguage();
+                $extension = 'com_templates';
+                $base_dir = JPATH_ADMINISTRATOR;
+                $language_tag = 'en-GB';
+                $reload = true;
+                $lang->load($extension, $base_dir, $language_tag, $reload);
 
-            $data['params']['template_style_id'] = (string) $templateStylesModel->getState('style.id');
+                JFactory::getApplication()->enqueueMessage($templateStylesModel->getError());
+                return false;
+            } else {
+                \JFactory::getApplication()->input->set('id', $t_pk);
+                $data['params']['template_style_id'] = (string) $templateStylesModel->getState('style.id');
+            }
         }
 
         // MODULES
@@ -540,7 +555,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
         }
 
         // Respond to generating these modules:
-        
+
         // Funder modules (appears on all pages)
         if ($data['params']['funder_module_id'] == 'autogenerate') {
 
@@ -942,7 +957,7 @@ EOD;
             \JFactory::getApplication()->input->set('id', $t_pk);
             $data['params']['recruitment_summary_module_id'] = (string) $moduleModel->getState('module.id');
         }
-        
+
         // PROJECT recruitment chart
         if ($data['params']['recruitment_chart_module_id'] == 'autogenerate') {
 
@@ -968,7 +983,7 @@ EOD;
             \JFactory::getApplication()->input->set('id', $t_pk);
             $data['params']['recruitment_chart_module_id'] = (string) $moduleModel->getState('module.id');
         }
-        
+
         return parent::save($data);
     }
 
