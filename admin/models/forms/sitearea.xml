@@ -110,9 +110,11 @@
                 label="COM_SITEAREAS_UNIT_LABEL"
                 description="COM_SITEAREAS_UNIT_DESC"
             >
-                <option value="npeu">NPEU (including PRU-MNHC)</option>
+                <option value="npeu">NPEU</option>
                 <option value="npeu_ctu">NPEU CTU</option>
+                <option value="pru-mnhc">PRU-MNHC</option>
                 <option value="sheer">SHEER</option>
+                <option value="he">Health Economics</option>
             </field>
             <field
                 name="root_catid"
