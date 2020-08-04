@@ -341,6 +341,17 @@ class SiteAreasModelSiteArea extends JModelAdmin
             // Build the path for our category
             $category->rebuildPath($category->id);
             $data['params']['root_catid'] = (string) $category->id;
+            
+            // We need to grant all permissions to this category for the admin user group:
+            // {"core.create":{"162":1},"core.delete":{"162":1},"core.edit":{"162":1},"core.edit.state":{"162":1},"core.edit.own":{"162":1}}
+            $g = $data['admin_group_id'];
+            $rules = '{"core.create":{"' . $g . '":1},"core.delete":{"' . $g . '":1},"core.edit":{"' . $g . '":1},"core.edit.state":{"' . $g . '":1},"core.edit.own":{"' . $g . '":1}}';
+            $query = $db->getQuery(true);
+            $query->update($query->qn('#__assets'))
+                  ->set($query->qn('rules') . ' = ' . $query->q($rules))
+                  ->where($query->qn('name') . ' = ' . $query->q('com_content.category.' . $data['params']['root_catid']));
+            $db->setQuery($query);
+            $db->execute();
         }
 
         // If a category was simply selected, check for a News category, and make one if not
