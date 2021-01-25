@@ -550,7 +550,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['published']  = 1;
             $module['module']     = 'mod_menu';
             $module['access']     = $data['access'];
-            $module['showtitle']  = 0;
+            $module['showtitle']  = 1;
             $module['params']     = json_decode('{"menutype":"' . $data['alias'] . '","base":"","startLevel":3,"endLevel":0,"showAllChildren":1,"tag_id":"","class_sfx":"","window_open":"","layout":"npeu6:Section Menu","moduleclass_sfx":"","cache":1,"cache_time":900,"cachemode":"itemid","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"","cta_url":"","wrapper":"panel","theme":"","headline_image":""}', true);
 
             $moduleModel->setState('module.id', 0);
@@ -617,7 +617,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['published']  = 1;
             $module['module']     = 'mod_articles_latest';
             $module['access']     = $data['access'];
-            $module['showtitle']  = 0;
+            $module['showtitle']  = 1;
             $module['params']     = json_decode('{"catid":[' . $data['params']['news_catid'] . '],"count":1,"show_featured":"","ordering":"p_dsc","user_id":"0","layout":"_:default","moduleclass_sfx":"","cache":1,"cache_time":900,"cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"See all updates","cta_url":"https:\/\/www.npeu.ox.ac.uk\/' . $data['alias'] . '\/whats-new","wrapper":"panel","theme":"","headline_image":""}', true);
 
             $moduleModel->setState('module.id', 0);
@@ -645,7 +645,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['published']  = 1;
             $module['module']     = 'mod_custom';
             $module['access']     = $data['access'];
-            $module['showtitle']  = 0;
+            $module['showtitle']  = 1;
             $module['params']     = json_decode('{"prepare_content":0,"backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":1,"cache_time":900,"cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"","cta_url":"","wrapper":"panel","theme":"","headline_image":""}', true);
 
             $moduleModel->setState('module.id', 0);
@@ -672,7 +672,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['published']  = 1;
             $module['module']     = 'mod_map';
             $module['access']     = $data['access'];
-            $module['showtitle']  = 0;
+            $module['showtitle']  = 1;
             $module['params']     = json_decode('{"lat":51.751613839,"lng":-1.21574715729,"zoom":13,"access_token":"pk.eyJ1IjoiYW5keWtraXJrIiwiYSI6ImNqbGh3a3FnbzA1aDMza204eDJnMmVhMmMifQ.I7diR0BZvQWzn2okKy6qIQ","height":300,"legend":"","manual_markers":"true,true,blue,\"' . ($data['params']['unit'] == 'npeu_ctu' ? 'NPEU Clinical Trials Unit\r\n' : '') . 'National Perinatal Epidemiology Unit (NPEU)\r\nNuffield Department of Population Health\r\nUniversity of Oxford\r\nOld Road Campus\r\nOxford, OX3 7LF\"","remote_markers_url":"","remote_markers_json_format":"","static_map_alt":"","static_map_no_js":"No javascript available, can\'t display an interactive map.","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"Find out more","cta_url":"https:\/\/www.npeu.ox.ac.uk\/find-us","wrapper":"panel","theme":"","headline_image":""}', true);
 
             $moduleModel->setState('module.id', 0);
@@ -699,7 +699,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['published']  = 1;
             $module['module']     = 'mod_text';
             $module['access']     = $data['access'];
-            $module['showtitle']  = 0;
+            $module['showtitle']  = 1;
             $module['params']     = json_decode('{"cta_text":"Find out more","cta_url":"https:\/\/www.npeu.ox.ac.uk\/' . $data['alias'] . '\/parents","cta_position":"bottom","module_tag":"div","bootstrap_size":"0","header_tag":"h1","header_class":"","style":"Npeu6-bespoke","wrapper":"panel_longform","theme":"white","headline_image":""}', true);
 
             $moduleModel->setState('module.id', 0);
