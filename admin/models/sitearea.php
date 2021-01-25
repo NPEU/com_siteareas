@@ -579,7 +579,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['module']     = 'mod_funder';
             $module['access']     = $data['access'];
             $module['showtitle']  = 0;
-            $module['params']     = json_decode('{"brand_id":"2","brand_url":"https:\/\/www.nihr.ac.uk\/funding-and-support\/funding-for-research-studies\/funding-programmes\/health-technology-assessment\/","statement":"<p class=\"c-utilitext\">This study is funded by the National Institute for Health Research (NIHR) <a href=\"http:\/\/www.nihr.ac.uk\/funding-and-support\/funding-for-research-studies\/funding-programmes\/health-technology-assessment\/\" rel=\"external nofollow noreferrer\">Health Technology Assessment (HTA) Programme<\/a> (Reference Number [CHANGE ME]). The views expressed are those of the author(s) and not necessarily those of the NIHR or the Department of Health and Social Care.<\/p>\r\n","image":"\/assets\/images\/baby-asleep-198666544.jpg","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"","cta_url":"","wrapper":"","theme":"","headline_image":""}', true);
+            $module['params']     = json_decode('{"brand_id":"2","brand_url":"https:\/\/www.nihr.ac.uk\/funding-and-support\/funding-for-research-studies\/funding-programmes\/health-technology-assessment\/","statement":"<p class=\"c-utilitext\">This study is funded by the National Institute for Health Research (NIHR) <a href=\"http:\/\/www.nihr.ac.uk\/funding-and-support\/funding-for-research-studies\/funding-programmes\/health-technology-assessment\/\" rel=\"external nofollow noreferrer\">Health Technology Assessment (HTA) Programme<\/a> (Reference Number [CHANGE ME]). The views expressed are those of the author(s) and not necessarily those of the NIHR or the Department of Health and Social Care.<\/p>\r\n","image":"assets\/images\/baby-asleep-198666544.jpg","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"","cta_url":"","wrapper":"","theme":"","headline_image":""}', true);
 
             $moduleModel->setState('module.id', 0);
             $t_pk = \JFactory::getApplication()->input->getInt('id');
@@ -845,9 +845,9 @@ class SiteAreasModelSiteArea extends JModelAdmin
 <h2>Connect with us</h2>
 
 <div class="l-start">
-<div class="u-padding--xs"><a class="c-badge  c-badge--small  twitter" href="https://twitter.com/npeu_oxford" rel="external noopener noreferrer" target="_blank"><img alt="YouTube" height="60" onerror="this.src='/assets/images/brand-logos/social/twitter.png'; this.onerror=null;" src="/assets/images/brand-logos/social/twitter.svg"> </a></div>
+<div class="u-padding--s"><a class="c-badge  c-badge  twitter" href="https://twitter.com/npeu_oxford" rel="external noopener noreferrer" target="_blank"><img alt="YouTube" height="60" onerror="this.src='/assets/images/brand-logos/social/twitter.png'; this.onerror=null;" src="/assets/images/brand-logos/social/twitter.svg"> </a></div>
 
-<div class="u-padding--xs"><a class="c-badge  c-badge--small  youtube" href="https://www.youtube.com/user/NPEUOxford" rel="external noopener noreferrer" target="_blank"><img alt="Twitter" height="60" onerror="this.src='/assets/images/brand-logos/social/youtube.png'; this.onerror=null;" src="/assets/images/brand-logos/social/youtube.svg"> </a></div>
+<div class="u-padding--s"><a class="c-badge  c-badge  youtube" href="https://www.youtube.com/user/NPEUOxford" rel="external noopener noreferrer" target="_blank"><img alt="Twitter" height="60" onerror="this.src='/assets/images/brand-logos/social/youtube.png'; this.onerror=null;" src="/assets/images/brand-logos/social/youtube.svg"> </a></div>
 </div>
 </section>
 </div>
