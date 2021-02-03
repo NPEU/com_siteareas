@@ -65,7 +65,7 @@
             type="rootmenuitem"
             label="COM_SITEAREAS_ROOT_MENU_ITEM_LABEL"
             description="COM_SITEAREAS_ROOT_MENU_ITEM_DESC"
-            exclude_menus="_Main Menu, _User, _Ancillary, _Navbar, _Staff"
+            exclude_menus="_Main Menu, _User, _Ancillary, _Navbar"
         >
             <option value="">COM_SITEAREAS_ROOT_MENU_ITEM_DEFAULT</option>
         </field>
