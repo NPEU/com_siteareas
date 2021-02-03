@@ -44,7 +44,7 @@ class JFormFieldBrandTemplateStyle extends JFormFieldTemplatestyle
         if (empty($brand_id)) {
             $element->addAttribute('disabled', 'true');
         }
-        
+
         $result = parent::setup($element, $value, $group);
 
         if ($result === true)
@@ -74,5 +74,22 @@ class JFormFieldBrandTemplateStyle extends JFormFieldTemplatestyle
         }
 
         return implode("\n", $return);
+    }
+
+    /**
+     * Method to get the field option groups.
+     *
+     * @return  array  The field option objects as a nested array in groups.
+     */
+    protected function getGroups()
+    {
+        $groups = parent::getGroups();
+
+        // If an ID is already selected, we don't want the auto-generate option:
+        if (!empty($this->value)) {
+            unset($groups[0][1]);
+        }
+
+        return $groups;
     }
 }

@@ -341,7 +341,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             // Build the path for our category
             $category->rebuildPath($category->id);
             $data['params']['root_catid'] = (string) $category->id;
-            
+
             // We need to grant all permissions to this category for the admin user group:
             // {"core.create":{"162":1},"core.delete":{"162":1},"core.edit":{"162":1},"core.edit.state":{"162":1},"core.edit.own":{"162":1}}
             $g = $data['admin_group_id'];
@@ -478,7 +478,6 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $new_style['title']     = $template_title . ' - ' . $data['name'];
             $new_style['params']    = $template_params;
 
-#echo '<pre>'; var_dump($new_style); echo '</pre>'; exit;
 
             // State id problem similar to Brand above, so temporarily overriding the state id:
             $this->setState('style.id', 0);
@@ -503,6 +502,37 @@ class SiteAreasModelSiteArea extends JModelAdmin
                 \JFactory::getApplication()->input->set('id', $t_pk);
                 $data['params']['template_style_id'] = (string) $templateStylesModel->getState('style.id');
             }
+        }
+
+        // Respond to Search Menu Item auto-generate:
+        if ($data['params']['search_menu_item_id'] == 'autogenerate') {
+
+            // Generate a new menu item:
+            $menuItem = array(
+                'menutype'     => $data['alias'],
+                'title'        => 'Search',
+                'alias'        => 'search',
+                'path'         => $data['alias'] . '/search',
+                'access'       => 6,
+                'link'         => 'index.php?option=com_finder&view=search',
+                'type'         => 'component',
+                'state'        => 0,
+                'parent_id'    => $data['root_menu_item_id'],
+                'level'        => 2,
+                'component_id' => 27,
+                'language'     => '*'
+            );
+
+            $menuTable = JTable::getInstance('Menu', 'JTable', array());
+
+            $menuTable->setLocation($data['root_menu_item_id'], 'first-child');
+
+            if (!$menuTable->save($menuItem)) {
+                throw new Exception($menuTable->getError());
+                return false;
+            }
+
+            $data['params']['search_menu_item_id'] = $menuTable->id;
         }
 
         // MODULES

@@ -56,6 +56,12 @@ class JFormFieldBrand extends JFormFieldList
             $options = parent::getOptions();
             $options[0]->text = JText::_('COM_SITEAREAS_BRAND_DEFAULT_NO_BRANDS');
         }
+
+        // If an ID is already selected, we don't want the auto-generate option:
+        if (!empty($this->value)) {
+            unset($options[1]);
+        }
+
         return $options;
     }
 
