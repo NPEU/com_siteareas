@@ -581,7 +581,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['module']     = 'mod_menu';
             $module['access']     = $data['access'];
             $module['showtitle']  = 1;
-            $module['params']     = json_decode('{"menutype":"' . $data['alias'] . '","base":"","startLevel":3,"endLevel":0,"showAllChildren":1,"tag_id":"","class_sfx":"","window_open":"","layout":"npeu6:Section Menu","moduleclass_sfx":"","cache":1,"cache_time":900,"cachemode":"itemid","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"","cta_url":"","wrapper":"panel","theme":"","headline_image":""}', true);
+            $module['params']     = json_decode('{"menutype":"' . $data['alias'] . '","base":"","startLevel":3,"endLevel":0,"showAllChildren":1,"tag_id":"","class_sfx":"","window_open":"","layout":"npeu6:Section-Menu","moduleclass_sfx":"","cache":1,"cache_time":900,"cachemode":"itemid","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0","cta_text":"","cta_url":"","wrapper":"panel","theme":"","headline_image":""}', true);
 
             $moduleModel->setState('module.id', 0);
             $t_pk = \JFactory::getApplication()->input->getInt('id');
