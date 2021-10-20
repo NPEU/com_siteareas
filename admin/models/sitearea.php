@@ -869,7 +869,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
             $module['content']    = <<<EOD
 <div class="l-col-to-row-wrap">
 <div class="l-col-to-row">
-<div class="ff-width-100--45--33-333 l-col-to-row__item">
+<div>
 <div class="c-panel t-white u-fill-height">
 <section class="c-panel--module">
 <h2>Connect with us</h2>
@@ -883,17 +883,15 @@ class SiteAreasModelSiteArea extends JModelAdmin
 </div>
 </div>
 
-<div class="ff-width-100--45--66-666 l-col-to-row__item">
+<div>
 <div class="c-panel t-white u-fill-height">
 <section class="c-panel--module">
 <h2>Support</h2>
 
-<div class="l-distribute-wrap">
-<div class="l-distribute">
+<div class="l-start">
 
 <div class="l-center u-padding--s"><a class="c-badge" href="http://www.CHANGE-ME" rel="external noopener noreferrer" target="_blank"><img alt="Logo: CHANGE-ME" height="80" onerror="this.src='/assets/images/brand-logos/affiliate/CHANGE-ME-logo.png'; this.onerror=null;" src="/assets/images/brand-logos/affiliate/CHANGE-ME-logo.svg"> </a></div>
 
-</div>
 </div>
 </section>
 </div>
