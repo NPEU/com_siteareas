@@ -861,7 +861,7 @@ class SiteAreasModelSiteArea extends JModelAdmin
         }
 
         // PROJECT support and connect (all pages)
-        if ($data['params']['support_connect_module_id'] == 'autogenerate') {
+        /*if ($data['params']['support_connect_module_id'] == 'autogenerate') {
 
             $module = array();
             $module['assignment'] = false;
@@ -917,6 +917,64 @@ EOD;
             }
             \JFactory::getApplication()->input->set('id', $t_pk);
             $data['params']['support_connect_module_id'] = (string) $moduleModel->getState('module.id');
+        }*/
+        
+        // PROJECT support (all pages)
+        if ($data['params']['support_module_id'] == 'autogenerate') {
+
+            $module = array();
+            $module['assignment'] = false;
+            $module['title']      = 'Support';
+            $module['note']       = $data['name'];
+            
+            $module['ordering']   = 1;
+            $module['position']   = '6-footer-mid-right';
+            $module['published']  = 1;
+            $module['module']     = 'mod_badgelist';
+            $module['access']     = $data['access'];
+            $module['showtitle']  = 1;
+            //{"badges":{"badges0":{"brand_id":"91","override_url":"","limit_height":"8"}},"list_layout":"","list_gutter":"m","flush_gutter":"1","list_basis":"","layout":"_:default","module_tag":"div","bootstrap_size":"0","header_tag":"h2","header_class":"u-space--below","style":"0","cta_text":"","cta_url":"","cta_position":"header","wrapper":"panel","theme":"white","color":"neutral","headline_image":""}
+            $module['params']     = json_decode('{"list_layout":"","list_gutter":"m","flush_gutter":"1","list_basis":"","layout":"_:default","module_tag":"div","bootstrap_size":"0","header_tag":"h2","header_class":"u-space--below","style":"0","cta_text":"","cta_url":"","cta_position":"header","wrapper":"panel","theme":"white","color":"neutral","headline_image":""}', true);
+
+            $moduleModel->setState('module.id', 0);
+            $t_pk = \JFactory::getApplication()->input->getInt('id');
+            \JFactory::getApplication()->input->set('id', 0);
+            if (!$moduleModel->save($module)) {
+
+                JFactory::getApplication()->enqueueMessage($moduleModel->getError());
+                return false;
+            }
+            \JFactory::getApplication()->input->set('id', $t_pk);
+            $data['params']['support_module_id'] = (string) $moduleModel->getState('module.id');
+        }
+        
+        // PROJECT connect (all pages)
+        if ($data['params']['connect_module_id'] == 'autogenerate') {
+
+            $module = array();
+            $module['assignment'] = false;
+            $module['title']      = 'Connect with us';
+            $module['note']       = $data['name'];
+            
+            $module['ordering']   = 1;
+            $module['position']   = '6-footer-mid-right';
+            $module['published']  = 1;
+            $module['module']     = 'mod_social';
+            $module['access']     = $data['access'];
+            $module['showtitle']  = 1;
+            //{"enable_twitter":"1","twitter":"npeu_ctu","enable_youtube":"1","youtube":"NPEUOxford","layout":"_:default","module_tag":"div","bootstrap_size":"0","header_tag":"h2","header_class":"u-space--below","style":"0","cta_text":"","cta_url":"","cta_position":"header","wrapper":"panel","theme":"white","color":"neutral","headline_image":""}
+            $module['params']     = json_decode('{"enable_twitter":"1","twitter":"npeu_oxford","enable_youtube":"1","youtube":"NPEUOxford","layout":"_:default","module_tag":"div","bootstrap_size":"0","header_tag":"h2","header_class":"u-space--below","style":"0","cta_text":"","cta_url":"","cta_position":"header","wrapper":"panel","theme":"white","color":"neutral","headline_image":""}', true);
+
+            $moduleModel->setState('module.id', 0);
+            $t_pk = \JFactory::getApplication()->input->getInt('id');
+            \JFactory::getApplication()->input->set('id', 0);
+            if (!$moduleModel->save($module)) {
+
+                JFactory::getApplication()->enqueueMessage($moduleModel->getError());
+                return false;
+            }
+            \JFactory::getApplication()->input->set('id', $t_pk);
+            $data['params']['connect_module_id'] = (string) $moduleModel->getState('module.id');
         }
 
         // PROJECT sites map

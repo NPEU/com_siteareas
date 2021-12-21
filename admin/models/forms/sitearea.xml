@@ -298,12 +298,34 @@
                 <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
                 <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
             </field>
-            <field
+            <!--<field
                 name="support_connect_module_id"
                 type="module"
                 label="COM_SITEAREAS_SUPPORT_CONNECT_LABEL"
                 description="COM_SITEAREAS_SUPPORT_CONNECT_DESC"
                 moduletype="mod_custom"
+                header="Select module"
+            >
+                <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+            </field>-->
+            <field
+                name="support_module_id"
+                type="module"
+                label="COM_SITEAREAS_SUPPORT_LABEL"
+                description="COM_SITEAREAS_SUPPORT_DESC"
+                moduletype="mod_badgelist"
+                header="Select module"
+            >
+                <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+                <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+            </field>
+            <field
+                name="connect_module_id"
+                type="module"
+                label="COM_SITEAREAS_CONNECT_LABEL"
+                description="COM_SITEAREAS_CONNECT_DESC"
+                moduletype="mod_social"
                 header="Select module"
             >
                 <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
