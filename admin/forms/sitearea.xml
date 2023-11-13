@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form
+    addruleprefix="NPEU\Component\Siteareas\Administrator\Rule"
+    addfieldprefix="NPEU\Component\Siteareas\Administrator\Field"
+>
+    <fieldset
+        name="main"
+        label="COM_SITEAREAS_FIELDSET_MAIN_LABEL"
+    >
+    <field
+        name="about_notice"
+        type="notice"
+        label="COM_SITEAREAS_ABOUT_NOTICE_LABEL"
+        message="COM_SITEAREAS_ABOUT_NOTICE_MESSAGE"
+        readonly="true"
+    />
+    <field
+        name="id"
+        type="hidden"
+    />
+    <field
+        name="name"
+        type="text"
+        size="30"
+        label="COM_SITEAREAS_NAME_LABEL"
+        description="COM_SITEAREAS_NAME_DESC"
+        filter="string"
+        required="true"
+        class=""
+        labelclass=""
+    />
+    <field
+        name="alias"
+        type="text"
+        size="30"
+        label="COM_SITEAREAS_ALIAS_LABEL"
+        description="COM_SITEAREAS_ALIAS_DESC"
+        hint="COM_SITEAREAS_ALIAS_HINT"
+        filter="string"
+        class=""
+        labelclass=""
+    />
+    <field
+        name="owner_user_id"
+        type="staff"
+        label="COM_SITEAREAS_OWNER_LABEL"
+        description="COM_SITEAREAS_OWNER_DESC"
+        default="COM_SITEAREAS_OWNER_DEFAULT"
+        filter="int"
+        class="inputbox"
+        required="true"
+    >
+        <option value="">COM_SITEAREAS_OWNER_DEFAULT</option>
+    </field>
+    <field
+        name="admin_group_id"
+        type="admingroup"
+        label="COM_SITEAREAS_ADMIN_GROUP_LABEL"
+        description="COM_SITEAREAS_ADMIN_GROUP_DESC"
+    >
+        <option value="">COM_SITEAREAS_ADMIN_GROUP_DEFAULT</option>
+    </field>
+    <field
+        name="root_menu_item_id"
+        type="rootmenuitem"
+        label="COM_SITEAREAS_ROOT_MENU_ITEM_LABEL"
+        description="COM_SITEAREAS_ROOT_MENU_ITEM_DESC"
+        exclude_menus="_Main Menu, _User, _Ancillary, _Navbar"
+    >
+        <option value="">COM_SITEAREAS_ROOT_MENU_ITEM_DEFAULT</option>
+    </field>
+    <field
+        name="access"
+        type="accesslevel"
+        label="JFIELD_ACCESS_LABEL"
+        description="JFIELD_ACCESS_DESC"
+    />
+    <field name="state" type="list" label="JSTATUS"
+        description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+        filter="intval" size="1" default="1"
+    >
+        <option value="1">
+            JPUBLISHED</option>
+        <option value="0">
+            JUNPUBLISHED</option>
+        <option value="2">
+            JARCHIVED</option>
+        <option value="-2">
+            JTRASHED</option>
+    </field>
+    </fieldset>
+    <fields name="params">
+    <fieldset
+        name="optional"
+        label="COM_SITEAREAS_FIELDSET_OPTIONAL_LABEL"
+    >
+        <field
+            name="description"
+            type="textarea"
+            label="COM_SITEAREAS_DESCRIPTION_LABEL"
+            description="COM_SITEAREAS_DESCRIPTION_DESC"
+            filter="string"
+            class=""
+            labelclass=""
+        />
+        <field
+            name="unit"
+            type="list"
+            default="npeu"
+            label="COM_SITEAREAS_UNIT_LABEL"
+            description="COM_SITEAREAS_UNIT_DESC"
+        >
+            <option value="npeu">NPEU</option>
+            <option value="npeu_ctu">NPEU CTU</option>
+            <option value="pru-mnhc">PRU-MNHC</option>
+            <option value="sheer">SHEER</option>
+            <option value="he">Health Economics</option>
+        </field>
+        <field
+            name="root_catid"
+            type="rootcategory"
+            extension="com_content"
+            label="COM_SITEAREAS_CATEGORY_LABEL"
+            description="COM_SITEAREAS_CATEGORY_DESC"
+            default=""
+            exclude_categories="Uncategorised,Archive,Announcements,Reports"
+            published="1"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="news_catid"
+            type="childcategory"
+            extension="com_content"
+            label="COM_SITEAREAS_NEWS_CATEGORY_LABEL"
+            description="COM_SITEAREAS_NEWS_CATEGORY_DESC"
+            default=""
+            parent_category="root_catid"
+            published="1"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="brand_id"
+            type="brand"
+            label="COM_SITEAREAS_BRAND_LABEL"
+            description="COM_SITEAREAS_BRAND_DESC"
+            default=""
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="template_style_id"
+            type="brandtemplatestyle"
+            label="COM_SITEAREAS_TEMPLATE_STYLE_LABEL"
+            description="COM_SITEAREAS_TEMPLATE_STYLE_DESC"
+            default=""
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="search_menu_item_id"
+            type="searchmenuitem"
+            label="COM_SITEAREAS_SEARCH_MENU_ITEM_LABEL"
+            description="COM_SITEAREAS_SEARCH_MENU_ITEM_DESC"
+            default=""
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+    </fieldset>
+    <fieldset
+        name="optional-modules"
+        label="COM_SITEAREAS_FIELDSET_OPTIONAL_MODULES_LABEL"
+    >
+        <field
+            name="navbar_module_id"
+            type="module"
+            label="COM_SITEAREAS_NAVBAR_LABEL"
+            description="COM_SITEAREAS_NAVBAR_DESC"
+            moduletype="mod_menu"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="section_menu_module_id"
+            type="module"
+            label="COM_SITEAREAS_SECTION_MENU_LABEL"
+            description="COM_SITEAREAS_SECTION_MENU_DESC"
+            moduletype="mod_menu"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="funder_module_id"
+            type="module"
+            label="COM_SITEAREAS_FUNDER_LABEL"
+            description="COM_SITEAREAS_FUNDER_DESC"
+            moduletype="mod_funder"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="latest_update_module_id"
+            type="module"
+            label="COM_SITEAREAS_LATEST_UPDATE_LABEL"
+            description="COM_SITEAREAS_LATEST_UPDATE_DESC"
+            moduletype="mod_articles_latest"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="contact_us_module_id"
+            type="module"
+            label="COM_SITEAREAS_CONTACT_US_LABEL"
+            description="COM_SITEAREAS_CONTACT_US_DESC"
+            moduletype="mod_custom"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="find_us_module_id"
+            type="module"
+            label="COM_SITEAREAS_FIND_US_LABEL"
+            description="COM_SITEAREAS_FIND_US_DESC"
+            moduletype="mod_map"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="intro_text_module_id"
+            type="module"
+            label="COM_SITEAREAS_INTRO_TEXT_LABEL"
+            description="COM_SITEAREAS_INTRO_TEXT_DESC"
+            moduletype="mod_text"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="signpost_module_id"
+            type="module"
+            label="COM_SITEAREAS_SIGNPOST_LABEL"
+            description="COM_SITEAREAS_SIGNPOST_DESC"
+            moduletype="mod_signpost"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="intro_video_module_id"
+            type="module"
+            label="COM_SITEAREAS_INTRO_VIDEO_LABEL"
+            description="COM_SITEAREAS_INTRO_VIDEO_DESC"
+            moduletype="mod_video"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="updates_module_id"
+            type="module"
+            label="COM_SITEAREAS_UPDATES_LABEL"
+            description="COM_SITEAREAS_UPDATES_DESC"
+            moduletype="mod_articles_latest"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="trial_info_module_id"
+            type="module"
+            label="COM_SITEAREAS_TRIAL_INFO_LABEL"
+            description="COM_SITEAREAS_TRIAL_INFO_DESC"
+            moduletype="mod_dataview"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <!--<field
+            name="support_connect_module_id"
+            type="module"
+            label="COM_SITEAREAS_SUPPORT_CONNECT_LABEL"
+            description="COM_SITEAREAS_SUPPORT_CONNECT_DESC"
+            moduletype="mod_custom"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>-->
+        <field
+            name="support_module_id"
+            type="module"
+            label="COM_SITEAREAS_SUPPORT_LABEL"
+            description="COM_SITEAREAS_SUPPORT_DESC"
+            moduletype="mod_badgelist"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="connect_module_id"
+            type="module"
+            label="COM_SITEAREAS_CONNECT_LABEL"
+            description="COM_SITEAREAS_CONNECT_DESC"
+            moduletype="mod_social"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="sites_map_module_id"
+            type="module"
+            label="COM_SITEAREAS_SITES_MAP_LABEL"
+            description="COM_SITEAREAS_SITES_MAP_DESC"
+            moduletype="mod_map"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="site_details_module_id"
+            type="module"
+            label="COM_SITEAREAS_SITE_DETAILS_LABEL"
+            description="COM_SITEAREAS_SITE_DETAILS_DESC"
+            moduletype="mod_dataview"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="recruitment_summary_module_id"
+            type="module"
+            label="COM_SITEAREAS_RECRUITMENT_SUMMARY_LABEL"
+            description="COM_SITEAREAS_RECRUITMENT_SUMMARY_DESC"
+            moduletype="mod_dataview"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+        <field
+            name="recruitment_chart_module_id"
+            type="module"
+            label="COM_SITEAREAS_RECRUITMENT_CHART_LABEL"
+            description="COM_SITEAREAS_RECRUITMENT_CHART_DESC"
+            moduletype="mod_dataview"
+            header="Select module"
+        >
+            <option value="">COM_SITEAREAS_SELECT_DEFAULT</option>
+            <option value="autogenerate">COM_SITEAREAS_SELECT_AUTO</option>
+        </field>
+    </fieldset>
+    </fields>
+</form>
