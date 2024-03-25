@@ -446,13 +446,13 @@ class SiteareaModel extends AdminModel
 
                 // Check to make sure our data is valid
                 if (!$news_category->check()) {
-                    throw new GenericDataException(implode("\n", $errors), 500);
+                    throw new GenericDataException($category->getError(), 500);
                     return false;
                 }
 
                 // Now store the category
                 if (!$news_category->store(true)) {
-                    throw new GenericDataException(implode("\n", $errors), 500);
+                    throw new GenericDataException($category->getError(), 500);
                     return false;
                 }
 
