@@ -11,8 +11,6 @@ use Joomla\Database\DatabaseInterface;
 
 defined('_JEXEC') or die;
 
-#JFormHelper::loadFieldClass('list');
-
 /**
  * Form field for a list of brands.
  */
