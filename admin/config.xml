@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config>
-    <fields
-        addfieldpath="/administrator/components/com_siteareas/models/fields"
+<config addfieldprefix="NPEU\Component\Siteareas\Administrator\Field">
+    <fieldset
+        name="records"
+        label="COM_SITEAREAS_CONFIG_RECORDS_SETTINGS_LABEL"
+        description="COM_SITEAREAS_CONFIG_RECORDS_SETTINGS_DESC"
     >
-        <fieldset
-            name="records"
-            label="COM_SITEAREAS_CONFIG_RECORDS_SETTINGS_LABEL"
-            description="COM_SITEAREAS_CONFIG_RECORDS_SETTINGS_DESC"
-        >
-            <field
-                name="template"
-                type="templates"
-                label="COM_SITEAREAS_CONFIG_TEMPLATE_LABEL"
-                description="COM_SITEAREAS_CONFIG_TEMPLATE_DESC"
-            />
-            <field
-                name="brand_category_id"
-                type="category"
-                label="COM_SITEAREAS_CONFIG_BRAND_CAT_LABEL"
-                description="COM_SITEAREAS_CONFIG_BRAND_CAT_DESC"
-                extension="com_brands"
-            />
-        </fieldset>
-        <fieldset name="permissions"
-            description="JCONFIG_PERMISSIONS_DESC"
-            label="JCONFIG_PERMISSIONS_LABEL"
-        >
+        <field
+            name="template"
+            type="templates"
+            label="COM_SITEAREAS_CONFIG_TEMPLATE_LABEL"
+            description="COM_SITEAREAS_CONFIG_TEMPLATE_DESC"
+        />
+        <field
+            name="brand_category_id"
+            type="category"
+            label="COM_SITEAREAS_CONFIG_BRAND_CAT_LABEL"
+            description="COM_SITEAREAS_CONFIG_BRAND_CAT_DESC"
+            extension="com_brands"
+        />
+    </fieldset>
 
-            <field name="rules" type="rules"
-                component="com_siteareas"
-                filter="rules"
-                validate="rules"
-                label="JCONFIG_PERMISSIONS_LABEL"
-                section="component" />
-        </fieldset>
-    </fields>
+    <fieldset name="permissions"
+        description="JCONFIG_PERMISSIONS_DESC"
+        label="JCONFIG_PERMISSIONS_LABEL"
+    >
+        <field name="rules" type="rules"
+            component="com_siteareas"
+            filter="rules"
+            validate="rules"
+            label="JCONFIG_PERMISSIONS_LABEL"
+            section="component"
+        />
+    </fieldset>
 </config>

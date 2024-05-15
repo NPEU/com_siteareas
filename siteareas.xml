@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade">
+
+    <name>COM_SITEAREAS</name>
+    <author>Andy Kirk</author>
+    <authorEmail>andy.kirk@npeu.ox.ac.uk</authorEmail>
+    <authorUrl>https://www.npeu.ox.ac.uk</authorUrl>
+    <creationDate>October 2023</creationDate>
+    <copyright>(C) NPEU 2023</copyright>
+    <license>MIT License; see LICENSE.md</license>
+
+    <version>4.0.0</version>
+    <description>COM_SITEAREAS_DESCRIPTION</description>
+
+    <namespace path="src">NPEU\Component\Siteareas</namespace>
+
+    <updateservers>
+        <server type="extension" name="NPEU: com_siteareas Update Site">https://raw.githubusercontent.com/NPEU/com_siteareas/main/update-manifest.xml</server>
+    </updateservers>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+
+    <administration>
+        <menu>COM_SITEAREAS_MENU</menu>
+
+        <files folder="admin">
+            <file>access.xml</file>
+            <file>config.xml</file>
+            <folder>forms</folder>
+            <folder>language</folder>
+            <folder>services</folder>
+            <folder>sql</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+        </files>
+    </administration>
+
+</extension>
