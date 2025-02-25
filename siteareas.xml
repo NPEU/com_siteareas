@@ -9,7 +9,7 @@
     <copyright>(C) NPEU 2023</copyright>
     <license>MIT License; see LICENSE.md</license>
 
-    <version>4.1.2</version>
+    <version>4.2.0</version>
     <description>COM_SITEAREAS_DESCRIPTION</description>
 
     <namespace path="src">NPEU\Component\Siteareas</namespace>
