@@ -256,7 +256,7 @@ class SiteareaModel extends AdminModel
                 'parent_id'=> 11
             ];
 
-            $groupModel = $app->bootComponent('com_users')->getMVCFactory()->createModel('Group', 'Administrator');
+            $groupModel = $app->bootComponent('com_users')->getMVCFactory()->createModel('Group', 'Administrator', ['ignore_request' => true]);
             if (!$groupModel->save($group)) {
                 $app->enqueueMessage($groupModel->getError());
                 return false;
@@ -482,7 +482,7 @@ class SiteareaModel extends AdminModel
             $new_brand['catid'] = $params->get('brand_category_id');
             $new_brand['state'] = 1;
 
-            $brandModel = $app->bootComponent('com_brands')->getMVCFactory()->createModel('Brand', 'Administrator');
+            $brandModel = $app->bootComponent('com_brands')->getMVCFactory()->createModel('Brand', 'Administrator', ['ignore_request' => true]);
 
             if (!$brandModel->save($new_brand)) {
                 $app->enqueueMessage($brandModel->getError());
@@ -551,7 +551,7 @@ class SiteareaModel extends AdminModel
             ####Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_templates/tables');
             ####$templateStylesModel = JModelLegacy::getInstance('Style', 'TemplatesModel');
 
-            $templateStylesModel = $app->bootComponent('com_templates')->getMVCFactory()->createModel('Style', 'Administrator');
+            $templateStylesModel = $app->bootComponent('com_templates')->getMVCFactory()->createModel('Style', 'Administrator', ['ignore_request' => true]);
 
             if (!$templateStylesModel->save($new_style)) {
 
@@ -605,7 +605,7 @@ class SiteareaModel extends AdminModel
         // MODULES
         ####JLoader::import('module', JPATH_ADMINISTRATOR . '/components/com_modules/models');
         ####$moduleModel = JModelLegacy::getInstance('Module', 'ModulesModel');
-        $moduleModel = $app->bootComponent('com_modules')->getMVCFactory()->createModel('Module', 'Administrator');
+        $moduleModel = $app->bootComponent('com_modules')->getMVCFactory()->createModel('Module', 'Administrator', ['ignore_request' => true]);
 
         // Autogenerate 'PROJECT navbar' and 'In this section':
 
