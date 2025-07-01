@@ -263,7 +263,7 @@ class SiteareaModel extends AdminModel
             }
 
             // Getting the new ID from the state doesn't seem to work anymore, so query the DB for
-            // the matching name (note is is deliberatly a repeat of the earlier query):
+            // the matching name (note this is deliberatly a repeat of the earlier query):
             $id = $this-> id_from_name('usergroups', 'id', 'title', $name);
 
             $data['admin_group_id'] = $id;
@@ -489,7 +489,7 @@ class SiteareaModel extends AdminModel
                 return false;
             }
             // Getting the new ID from the state doesn't seem to work anymore, so query the DB for
-            // the matching name (note is is deliberatly a repeat of the earlier query):
+            // the matching name (note this is deliberatly a repeat of the earlier query):
             $id = $this-> id_from_name('brands', 'id', 'alias', $data['alias']);
 
             $data['params']['brand_id'] = (string) $id;
@@ -566,7 +566,7 @@ class SiteareaModel extends AdminModel
                 return false;
             } else {
                 // Getting the new ID from the state doesn't seem to work anymore, so query the DB for
-                // the matching name (note is is deliberatly a repeat of the earlier query):
+                // the matching name (note this is deliberatly a repeat of the earlier query):
                 $id = $this-> id_from_name('template_styles', 'id', 'title', $template_full_title);
                 $data['params']['template_style_id'] = (string) $id;
             }
