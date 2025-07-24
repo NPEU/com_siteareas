@@ -956,9 +956,9 @@ class SiteareaModel extends AdminModel
 <h2>Connect with us</h2>
 
 <div class="l-start">
-<div class="u-padding--s"><a class="c-badge  c-badge  twitter" href="https://twitter.com/npeu_oxford" rel="external noopener noreferrer" target="_blank"><img alt="YouTube" height="60" onerror="this.src='/assets/images/brand-logos/social/twitter.png'; this.onerror=null;" src="/assets/images/brand-logos/social/twitter.svg"> </a></div>
+<div class="u-padding--s"><a class="c-badge  c-badge  x" href="https://x.com/npeu_oxford" rel="external noopener noreferrer" target="_blank"><img alt="YouTube" height="60" onerror="this.src='/assets/images/brand-logos/social/x.png'; this.onerror=null;" src="/assets/images/brand-logos/social/x.svg"> </a></div>
 
-<div class="u-padding--s"><a class="c-badge  c-badge  youtube" href="https://www.youtube.com/user/NPEUOxford" rel="external noopener noreferrer" target="_blank"><img alt="Twitter" height="60" onerror="this.src='/assets/images/brand-logos/social/youtube.png'; this.onerror=null;" src="/assets/images/brand-logos/social/youtube.svg"> </a></div>
+<div class="u-padding--s"><a class="c-badge  c-badge  youtube" href="https://www.youtube.com/user/NPEUOxford" rel="external noopener noreferrer" target="_blank"><img alt="x" height="60" onerror="this.src='/assets/images/brand-logos/social/youtube.png'; this.onerror=null;" src="/assets/images/brand-logos/social/youtube.svg"> </a></div>
 </div>
 </section>
 </div>
@@ -1045,8 +1045,8 @@ EOD;
             $module['access']     = $data['access'];
             $module['showtitle']  = 1;
             $module['language']   = '*';
-            //{"enable_twitter":"1","twitter":"npeu_ctu","enable_youtube":"1","youtube":"NPEUOxford","layout":"_:default","module_tag":"div","bootstrap_size":"0","header_tag":"h2","header_class":"u-space--below","style":"0","cta_text":"","cta_url":"","cta_position":"header","wrapper":"panel","theme":"white","color":"neutral","headline_image":""}
-            $module['params']     = json_decode('{"enable_twitter":"1","twitter":"npeu_oxford","enable_youtube":"1","youtube":"NPEUOxford","layout":"_:default","module_tag":"div","bootstrap_size":"0","header_tag":"h2","header_class":"u-space--below","style":"0","cta_text":"","cta_url":"","cta_position":"header","wrapper":"panel","theme":"white","color":"neutral","headline_image":""}', true);
+            //{"enable_x":"1","x":"npeu_ctu","enable_youtube":"1","youtube":"NPEUOxford","layout":"_:default","module_tag":"div","bootstrap_size":"0","header_tag":"h2","header_class":"u-space--below","style":"0","cta_text":"","cta_url":"","cta_position":"header","wrapper":"panel","theme":"white","color":"neutral","headline_image":""}
+            $module['params']     = json_decode('{"enable_x":"1","x":"npeu_oxford","enable_youtube":"1","youtube":"NPEUOxford","layout":"_:default","module_tag":"div","bootstrap_size":"0","header_tag":"h2","header_class":"u-space--below","style":"0","cta_text":"","cta_url":"","cta_position":"header","wrapper":"panel","theme":"white","color":"neutral","headline_image":""}', true);
 
             $moduleModel->setState('module.id', 0);
             $t_pk = $app->input->getInt('id');
